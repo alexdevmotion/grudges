@@ -1,0 +1,18 @@
+{
+  "dispatch-delay": "Keep the older delay visible when a newer dispatch appears",
+  "extension-calendar": "Cancel the old expiry charge without losing accrued interest",
+  "refund-visibility": "Hide screening from customers while keeping the refund blocked",
+  "cancel-notice": "Show one cancellation notice and leave it dismissed",
+  "saved-amount": "Skip the amount prompt from the hero too",
+  "estimate-prefill": "Use the estimate immediately and keep the stale-save warning",
+  "blur-formatting": "Format amounts on blur without submitting the separators",
+  "native-language-menu": "Let visitors recognize their language in both menus",
+  "starter/dispatch-delay": "Keep the older delay visible when a newer dispatch appears",
+  "starter/extension-calendar": "Cancel the old expiry charge without losing accrued interest",
+  "starter/refund-visibility": "Hide screening from customers while keeping the refund blocked",
+  "starter/cancel-notice": "Show one cancellation notice and leave it dismissed",
+  "starter/saved-amount": "Skip the amount prompt from the hero too",
+  "starter/estimate-prefill": "Use the estimate immediately and keep the stale-save warning",
+  "starter/blur-formatting": "Format amounts on blur without submitting the separators",
+  "starter/native-language-menu": "Let visitors recognize their language in both menus"
+}

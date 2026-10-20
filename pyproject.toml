@@ -1,0 +1,30 @@
+[project]
+name = "grudges"
+version = "0.1.0a1"
+description = "Save the tasks your coding agent failed. Re-run them on every new model."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{name = "Alex Constantin"}]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/alexdevmotion/grudges"
+Issues = "https://github.com/alexdevmotion/grudges/issues"
+
+[project.scripts]
+grudges = "grudges.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/grudges"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"packs" = "grudges/packs"
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "packs", "tests", "scripts", "README.md", "CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md", "RELEASING.md", "RELEASE-CHECKS.md", "LICENSE", "NOTICE", "pyproject.toml"]

@@ -1,0 +1,14 @@
+{
+  "dispatch-delay": "Keep the older delay visible when a newer dispatch appears",
+  "cancel-notice": "Show one cancellation notice and leave it dismissed",
+  "saved-amount": "Skip the amount prompt from the hero too",
+  "estimate-prefill": "Use the estimate immediately and keep the stale-save warning",
+  "blur-formatting": "Format amounts on blur without submitting the separators",
+  "native-language-menu": "Let visitors recognize their language in both menus",
+  "starter-intent/dispatch-delay": "Keep the older delay visible when a newer dispatch appears",
+  "starter-intent/cancel-notice": "Show one cancellation notice and leave it dismissed",
+  "starter-intent/saved-amount": "Skip the amount prompt from the hero too",
+  "starter-intent/estimate-prefill": "Use the estimate immediately and keep the stale-save warning",
+  "starter-intent/blur-formatting": "Format amounts on blur without submitting the separators",
+  "starter-intent/native-language-menu": "Let visitors recognize their language in both menus"
+}

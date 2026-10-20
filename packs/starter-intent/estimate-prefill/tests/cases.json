@@ -1,0 +1,263 @@
+[
+  [
+    "estimate changes finance without a choice",
+    {
+      "saved": {
+        "name": "Applicant",
+        "phone": "070-000-000",
+        "region": "R7",
+        "amount": 41000,
+        "term": 36,
+        "income": 4700,
+        "obligations": 300
+      },
+      "session": null,
+      "estimate": {
+        "amount": 56000,
+        "term": 24
+      },
+      "expected_revision": 4,
+      "current_revision": 4
+    },
+    {
+      "fields": {
+        "name": "Applicant",
+        "phone": "070-000-000",
+        "region": "R7",
+        "amount": 56000,
+        "term": 24,
+        "income": 4700,
+        "obligations": 300
+      },
+      "alerts": [],
+      "save": "accepted"
+    }
+  ],
+  [
+    "estimate contact ignored",
+    {
+      "saved": {
+        "name": "Applicant",
+        "phone": "070-000-000",
+        "region": "R7",
+        "amount": 41000,
+        "term": 36,
+        "income": 4700,
+        "obligations": 300
+      },
+      "session": null,
+      "estimate": {
+        "amount": 56000,
+        "name": "Estimate",
+        "phone": "999",
+        "region": "R0"
+      },
+      "expected_revision": 4,
+      "current_revision": 4
+    },
+    {
+      "fields": {
+        "name": "Applicant",
+        "phone": "070-000-000",
+        "region": "R7",
+        "amount": 56000,
+        "term": 36,
+        "income": 4700,
+        "obligations": 300
+      },
+      "alerts": [],
+      "save": "accepted"
+    }
+  ],
+  [
+    "session overrides estimate and saved",
+    {
+      "saved": {
+        "name": "Applicant",
+        "phone": "070-000-000",
+        "region": "R7",
+        "amount": 41000,
+        "term": 36,
+        "income": 4700,
+        "obligations": 300
+      },
+      "session": {
+        "amount": 64000,
+        "phone": null
+      },
+      "estimate": {
+        "amount": 56000,
+        "income": 8900
+      },
+      "expected_revision": 4,
+      "current_revision": 4
+    },
+    {
+      "fields": {
+        "name": "Applicant",
+        "phone": null,
+        "region": "R7",
+        "amount": 64000,
+        "term": 36,
+        "income": 8900,
+        "obligations": 300
+      },
+      "alerts": [],
+      "save": "accepted"
+    }
+  ],
+  [
+    "zero and null are present values",
+    {
+      "saved": {
+        "name": "Applicant",
+        "phone": "070-000-000",
+        "region": "R7",
+        "amount": 41000,
+        "term": 36,
+        "income": 4700,
+        "obligations": 300
+      },
+      "session": {
+        "term": 0
+      },
+      "estimate": {
+        "obligations": 0,
+        "income": null
+      },
+      "expected_revision": 4,
+      "current_revision": 4
+    },
+    {
+      "fields": {
+        "name": "Applicant",
+        "phone": "070-000-000",
+        "region": "R7",
+        "amount": 41000,
+        "term": 0,
+        "income": null,
+        "obligations": 0
+      },
+      "alerts": [],
+      "save": "accepted"
+    }
+  ],
+  [
+    "stale save remains protected",
+    {
+      "saved": {
+        "name": "Applicant",
+        "phone": "070-000-000",
+        "region": "R7",
+        "amount": 41000,
+        "term": 36,
+        "income": 4700,
+        "obligations": 300
+      },
+      "session": null,
+      "estimate": {
+        "amount": 56000
+      },
+      "expected_revision": 4,
+      "current_revision": 5
+    },
+    {
+      "fields": {
+        "name": "Applicant",
+        "phone": "070-000-000",
+        "region": "R7",
+        "amount": 56000,
+        "term": 36,
+        "income": 4700,
+        "obligations": 300
+      },
+      "alerts": [
+        "stale-save"
+      ],
+      "save": "conflict"
+    }
+  ],
+  [
+    "saved alone",
+    {
+      "saved": {
+        "name": "Applicant",
+        "phone": "070-000-000",
+        "region": "R7",
+        "amount": 41000,
+        "term": 36,
+        "income": 4700,
+        "obligations": 300
+      },
+      "session": null,
+      "estimate": null,
+      "expected_revision": 4,
+      "current_revision": 4
+    },
+    {
+      "fields": {
+        "name": "Applicant",
+        "phone": "070-000-000",
+        "region": "R7",
+        "amount": 41000,
+        "term": 36,
+        "income": 4700,
+        "obligations": 300
+      },
+      "alerts": [],
+      "save": "accepted"
+    }
+  ],
+  [
+    "no data",
+    {
+      "saved": null,
+      "session": null,
+      "estimate": null,
+      "expected_revision": 4,
+      "current_revision": 4
+    },
+    {
+      "fields": {
+        "name": null,
+        "phone": null,
+        "region": null,
+        "amount": null,
+        "term": null,
+        "income": null,
+        "obligations": null
+      },
+      "alerts": [],
+      "save": "accepted"
+    }
+  ],
+  [
+    "session alone and partial estimate",
+    {
+      "saved": null,
+      "session": {
+        "region": "R8",
+        "income": 2300
+      },
+      "estimate": {
+        "amount": 17000,
+        "obligations": 0
+      },
+      "expected_revision": 4,
+      "current_revision": 4
+    },
+    {
+      "fields": {
+        "name": null,
+        "phone": null,
+        "region": "R8",
+        "amount": 17000,
+        "term": null,
+        "income": 2300,
+        "obligations": 0
+      },
+      "alerts": [],
+      "save": "accepted"
+    }
+  ]
+]

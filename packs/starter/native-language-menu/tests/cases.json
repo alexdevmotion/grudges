@@ -1,0 +1,218 @@
+[
+  [
+    "nl desktop",
+    {
+      "locale": "nl",
+      "surface": "desktop"
+    },
+    {
+      "trigger": {
+        "code": "NL",
+        "label": "Taal kiezen"
+      },
+      "options": [
+        {
+          "code": "NL",
+          "text": "Nederlands",
+          "accessible": "Nederlands",
+          "lang": "nl",
+          "selected": true
+        },
+        {
+          "code": "DA",
+          "text": "Dansk",
+          "accessible": "Dansk",
+          "lang": "da",
+          "selected": false
+        },
+        {
+          "code": "EL",
+          "text": "Ελληνικά",
+          "accessible": "Ελληνικά",
+          "lang": "el",
+          "selected": false
+        }
+      ]
+    }
+  ],
+  [
+    "nl mobile",
+    {
+      "locale": "nl",
+      "surface": "mobile"
+    },
+    {
+      "trigger": {
+        "code": "NL",
+        "label": "Taal kiezen"
+      },
+      "options": [
+        {
+          "code": "NL",
+          "text": "Nederlands",
+          "accessible": "Nederlands",
+          "lang": "nl",
+          "selected": true
+        },
+        {
+          "code": "DA",
+          "text": "Dansk",
+          "accessible": "Dansk",
+          "lang": "da",
+          "selected": false
+        },
+        {
+          "code": "EL",
+          "text": "Ελληνικά",
+          "accessible": "Ελληνικά",
+          "lang": "el",
+          "selected": false
+        }
+      ]
+    }
+  ],
+  [
+    "da desktop",
+    {
+      "locale": "da",
+      "surface": "desktop"
+    },
+    {
+      "trigger": {
+        "code": "DA",
+        "label": "Vælg sprog"
+      },
+      "options": [
+        {
+          "code": "NL",
+          "text": "Nederlands",
+          "accessible": "Nederlands",
+          "lang": "nl",
+          "selected": false
+        },
+        {
+          "code": "DA",
+          "text": "Dansk",
+          "accessible": "Dansk",
+          "lang": "da",
+          "selected": true
+        },
+        {
+          "code": "EL",
+          "text": "Ελληνικά",
+          "accessible": "Ελληνικά",
+          "lang": "el",
+          "selected": false
+        }
+      ]
+    }
+  ],
+  [
+    "da mobile",
+    {
+      "locale": "da",
+      "surface": "mobile"
+    },
+    {
+      "trigger": {
+        "code": "DA",
+        "label": "Vælg sprog"
+      },
+      "options": [
+        {
+          "code": "NL",
+          "text": "Nederlands",
+          "accessible": "Nederlands",
+          "lang": "nl",
+          "selected": false
+        },
+        {
+          "code": "DA",
+          "text": "Dansk",
+          "accessible": "Dansk",
+          "lang": "da",
+          "selected": true
+        },
+        {
+          "code": "EL",
+          "text": "Ελληνικά",
+          "accessible": "Ελληνικά",
+          "lang": "el",
+          "selected": false
+        }
+      ]
+    }
+  ],
+  [
+    "el desktop",
+    {
+      "locale": "el",
+      "surface": "desktop"
+    },
+    {
+      "trigger": {
+        "code": "EL",
+        "label": "Επιλογή γλώσσας"
+      },
+      "options": [
+        {
+          "code": "NL",
+          "text": "Nederlands",
+          "accessible": "Nederlands",
+          "lang": "nl",
+          "selected": false
+        },
+        {
+          "code": "DA",
+          "text": "Dansk",
+          "accessible": "Dansk",
+          "lang": "da",
+          "selected": false
+        },
+        {
+          "code": "EL",
+          "text": "Ελληνικά",
+          "accessible": "Ελληνικά",
+          "lang": "el",
+          "selected": true
+        }
+      ]
+    }
+  ],
+  [
+    "el mobile",
+    {
+      "locale": "el",
+      "surface": "mobile"
+    },
+    {
+      "trigger": {
+        "code": "EL",
+        "label": "Επιλογή γλώσσας"
+      },
+      "options": [
+        {
+          "code": "NL",
+          "text": "Nederlands",
+          "accessible": "Nederlands",
+          "lang": "nl",
+          "selected": false
+        },
+        {
+          "code": "DA",
+          "text": "Dansk",
+          "accessible": "Dansk",
+          "lang": "da",
+          "selected": false
+        },
+        {
+          "code": "EL",
+          "text": "Ελληνικά",
+          "accessible": "Ελληνικά",
+          "lang": "el",
+          "selected": true
+        }
+      ]
+    }
+  ]
+]

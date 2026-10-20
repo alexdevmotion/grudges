@@ -1,0 +1,299 @@
+[
+  [
+    "hero saved draft",
+    {
+      "entry": "hero",
+      "estimate": null,
+      "draft": {
+        "amount": 47000,
+        "term": 18,
+        "income": 5300
+      },
+      "submitted": null,
+      "profile": {
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    },
+    {
+      "route": "form",
+      "fields": {
+        "amount": 47000,
+        "term": 18,
+        "income": 5300,
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    }
+  ],
+  [
+    "hero saved submitted preserves request",
+    {
+      "entry": "hero",
+      "estimate": null,
+      "draft": null,
+      "submitted": {
+        "amount": 68000,
+        "term": 18,
+        "income": 5300,
+        "id": "req-24"
+      },
+      "profile": {
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    },
+    {
+      "route": "submitted",
+      "id": "req-24"
+    }
+  ],
+  [
+    "explicit estimate overrides saved amount",
+    {
+      "entry": "estimate",
+      "estimate": {
+        "amount": 83000,
+        "term": 24,
+        "income": 6200
+      },
+      "draft": {
+        "amount": 47000,
+        "term": 18,
+        "income": 5300
+      },
+      "submitted": null,
+      "profile": {
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    },
+    {
+      "route": "form",
+      "fields": {
+        "amount": 83000,
+        "term": 24,
+        "income": 6200,
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    }
+  ],
+  [
+    "hero ignores unrelated estimate",
+    {
+      "entry": "hero",
+      "estimate": {
+        "amount": 83000,
+        "term": 18,
+        "income": 5300
+      },
+      "draft": {
+        "amount": 47000,
+        "term": 18,
+        "income": 5300
+      },
+      "submitted": null,
+      "profile": {
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    },
+    {
+      "route": "form",
+      "fields": {
+        "amount": 47000,
+        "term": 18,
+        "income": 5300,
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    }
+  ],
+  [
+    "saved draft wins over submitted",
+    {
+      "entry": "hero",
+      "estimate": null,
+      "draft": {
+        "amount": 47000,
+        "term": 18,
+        "income": 5300
+      },
+      "submitted": {
+        "amount": 68000,
+        "term": 18,
+        "income": 5300,
+        "id": "req-24"
+      },
+      "profile": {
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    },
+    {
+      "route": "form",
+      "fields": {
+        "amount": 47000,
+        "term": 18,
+        "income": 5300,
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    }
+  ],
+  [
+    "missing contacts do not force dialog",
+    {
+      "entry": "hero",
+      "estimate": null,
+      "draft": {
+        "amount": 47000,
+        "term": 18,
+        "income": 5300
+      },
+      "submitted": null,
+      "profile": {
+        "phone": null,
+        "region": null
+      }
+    },
+    {
+      "route": "form",
+      "fields": {
+        "amount": 47000,
+        "term": 18,
+        "income": 5300,
+        "phone": null,
+        "region": null
+      }
+    }
+  ],
+  [
+    "estimate entry falls back to saved submitted",
+    {
+      "entry": "estimate",
+      "estimate": {
+        "amount": 0,
+        "term": 18,
+        "income": 5300
+      },
+      "draft": null,
+      "submitted": {
+        "amount": 68000,
+        "term": 18,
+        "income": 5300,
+        "id": "req-24"
+      },
+      "profile": {
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    },
+    {
+      "route": "submitted",
+      "id": "req-24"
+    }
+  ],
+  [
+    "invalid draft falls through",
+    {
+      "entry": "hero",
+      "estimate": null,
+      "draft": {
+        "amount": -2,
+        "term": 18,
+        "income": 5300
+      },
+      "submitted": {
+        "amount": 68000,
+        "term": 18,
+        "income": 5300,
+        "id": "req-24"
+      },
+      "profile": {
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    },
+    {
+      "route": "submitted",
+      "id": "req-24"
+    }
+  ],
+  [
+    "unknown amount None",
+    {
+      "entry": "hero",
+      "estimate": null,
+      "draft": {
+        "amount": null,
+        "term": 18,
+        "income": 5300
+      },
+      "submitted": null,
+      "profile": {
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    },
+    {
+      "route": "dialog",
+      "fields": {
+        "amount": null,
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    }
+  ],
+  [
+    "unknown amount 0",
+    {
+      "entry": "hero",
+      "estimate": null,
+      "draft": {
+        "amount": 0,
+        "term": 18,
+        "income": 5300
+      },
+      "submitted": null,
+      "profile": {
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    },
+    {
+      "route": "dialog",
+      "fields": {
+        "amount": null,
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    }
+  ],
+  [
+    "unknown amount -7",
+    {
+      "entry": "hero",
+      "estimate": null,
+      "draft": {
+        "amount": -7,
+        "term": 18,
+        "income": 5300
+      },
+      "submitted": null,
+      "profile": {
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    },
+    {
+      "route": "dialog",
+      "fields": {
+        "amount": null,
+        "phone": "070-000-000",
+        "region": "R4"
+      }
+    }
+  ]
+]

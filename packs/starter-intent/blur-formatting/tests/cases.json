@@ -1,0 +1,325 @@
+[
+  [
+    "en edit and submission",
+    {
+      "locale": "en",
+      "initial": {
+        "amount": "146000",
+        "income": "8200",
+        "commitments": "0"
+      },
+      "events": [
+        {
+          "type": "submit"
+        },
+        {
+          "type": "focus",
+          "field": "amount"
+        },
+        {
+          "type": "input",
+          "field": "amount",
+          "value": "257000"
+        },
+        {
+          "type": "blur",
+          "field": "amount"
+        },
+        {
+          "type": "submit"
+        }
+      ]
+    },
+    [
+      {
+        "display": {},
+        "submission": {
+          "amount": "146000",
+          "income": "8200",
+          "commitments": "0"
+        }
+      },
+      {
+        "display": {},
+        "submission": null
+      },
+      {
+        "display": {},
+        "submission": null
+      },
+      {
+        "display": {
+          "amount": "257,000"
+        },
+        "submission": null
+      },
+      {
+        "display": {
+          "amount": "257,000"
+        },
+        "submission": {
+          "amount": "257000",
+          "income": "8200",
+          "commitments": "0"
+        }
+      }
+    ]
+  ],
+  [
+    "de edit and submission",
+    {
+      "locale": "de",
+      "initial": {
+        "amount": "146000",
+        "income": "8200",
+        "commitments": "0"
+      },
+      "events": [
+        {
+          "type": "submit"
+        },
+        {
+          "type": "focus",
+          "field": "amount"
+        },
+        {
+          "type": "input",
+          "field": "amount",
+          "value": "257000"
+        },
+        {
+          "type": "blur",
+          "field": "amount"
+        },
+        {
+          "type": "submit"
+        }
+      ]
+    },
+    [
+      {
+        "display": {},
+        "submission": {
+          "amount": "146000",
+          "income": "8200",
+          "commitments": "0"
+        }
+      },
+      {
+        "display": {},
+        "submission": null
+      },
+      {
+        "display": {},
+        "submission": null
+      },
+      {
+        "display": {
+          "amount": "257.000"
+        },
+        "submission": null
+      },
+      {
+        "display": {
+          "amount": "257.000"
+        },
+        "submission": {
+          "amount": "257000",
+          "income": "8200",
+          "commitments": "0"
+        }
+      }
+    ]
+  ],
+  [
+    "pl edit and submission",
+    {
+      "locale": "pl",
+      "initial": {
+        "amount": "146000",
+        "income": "8200",
+        "commitments": "0"
+      },
+      "events": [
+        {
+          "type": "submit"
+        },
+        {
+          "type": "focus",
+          "field": "amount"
+        },
+        {
+          "type": "input",
+          "field": "amount",
+          "value": "257000"
+        },
+        {
+          "type": "blur",
+          "field": "amount"
+        },
+        {
+          "type": "submit"
+        }
+      ]
+    },
+    [
+      {
+        "display": {},
+        "submission": {
+          "amount": "146000",
+          "income": "8200",
+          "commitments": "0"
+        }
+      },
+      {
+        "display": {},
+        "submission": null
+      },
+      {
+        "display": {},
+        "submission": null
+      },
+      {
+        "display": {
+          "amount": "257 000"
+        },
+        "submission": null
+      },
+      {
+        "display": {
+          "amount": "257 000"
+        },
+        "submission": {
+          "amount": "257000",
+          "income": "8200",
+          "commitments": "0"
+        }
+      }
+    ]
+  ],
+  [
+    "large value empty and independent field focus",
+    {
+      "locale": "en",
+      "initial": {
+        "amount": "9007199254740993",
+        "income": "",
+        "commitments": "12345"
+      },
+      "events": [
+        {
+          "type": "focus",
+          "field": "commitments"
+        },
+        {
+          "type": "locale",
+          "value": "de"
+        },
+        {
+          "type": "focus",
+          "field": "amount"
+        },
+        {
+          "type": "submit"
+        }
+      ]
+    },
+    [
+      {
+        "display": {},
+        "submission": null
+      },
+      {
+        "display": {},
+        "submission": null
+      },
+      {
+        "display": {},
+        "submission": null
+      },
+      {
+        "display": {},
+        "submission": {
+          "amount": "9007199254740993",
+          "income": "",
+          "commitments": "12345"
+        }
+      }
+    ]
+  ],
+  [
+    "repeated events remain stable",
+    {
+      "locale": "pl",
+      "initial": {
+        "amount": "9876",
+        "income": "12345",
+        "commitments": ""
+      },
+      "events": [
+        {
+          "type": "blur",
+          "field": "income"
+        },
+        {
+          "type": "blur",
+          "field": "income"
+        },
+        {
+          "type": "focus",
+          "field": "income"
+        },
+        {
+          "type": "input",
+          "field": "income",
+          "value": ""
+        },
+        {
+          "type": "blur",
+          "field": "income"
+        },
+        {
+          "type": "submit"
+        }
+      ]
+    },
+    [
+      {
+        "display": {
+          "income": "12 345"
+        },
+        "submission": null
+      },
+      {
+        "display": {
+          "income": "12 345"
+        },
+        "submission": null
+      },
+      {
+        "display": {},
+        "submission": null
+      },
+      {
+        "display": {},
+        "submission": null
+      },
+      {
+        "display": {
+          "income": ""
+        },
+        "submission": null
+      },
+      {
+        "display": {
+          "income": ""
+        },
+        "submission": {
+          "amount": "9876",
+          "income": "",
+          "commitments": ""
+        }
+      }
+    ]
+  ]
+]

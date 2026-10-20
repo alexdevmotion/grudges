@@ -1,0 +1,396 @@
+[
+  [
+    "off calendar expiry",
+    {
+      "start": "2032-01-19",
+      "expiry": "2032-02-13",
+      "extended": "2032-03-09",
+      "balance": 365000,
+      "rate": 1000,
+      "extra_rate": 250,
+      "frequency": "monthly"
+    },
+    {
+      "ledger": [
+        {
+          "date": "2032-02-01",
+          "base": 1300,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-01",
+          "base": 2900,
+          "extra": 425,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-09",
+          "base": 800,
+          "extra": 200,
+          "principal": 365000
+        }
+      ],
+      "preview": [
+        {
+          "date": "2032-02-01",
+          "base": 1300,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-01",
+          "base": 2900,
+          "extra": 425,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-09",
+          "base": 800,
+          "extra": 200,
+          "principal": 365000
+        }
+      ],
+      "next": "2032-02-01"
+    }
+  ],
+  [
+    "next skips old expiry",
+    {
+      "start": "2032-01-19",
+      "expiry": "2032-02-13",
+      "extended": "2032-03-09",
+      "balance": 365000,
+      "rate": 1000,
+      "extra_rate": 250,
+      "frequency": "monthly",
+      "as_of": "2032-02-08"
+    },
+    {
+      "ledger": [
+        {
+          "date": "2032-02-01",
+          "base": 1300,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-01",
+          "base": 2900,
+          "extra": 425,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-09",
+          "base": 800,
+          "extra": 200,
+          "principal": 365000
+        }
+      ],
+      "preview": [
+        {
+          "date": "2032-02-01",
+          "base": 1300,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-01",
+          "base": 2900,
+          "extra": 425,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-09",
+          "base": 800,
+          "extra": 200,
+          "principal": 365000
+        }
+      ],
+      "next": "2032-03-01"
+    }
+  ],
+  [
+    "non extended",
+    {
+      "start": "2032-01-19",
+      "expiry": "2032-02-13",
+      "extended": null,
+      "balance": 365000,
+      "rate": 1000,
+      "extra_rate": 250,
+      "frequency": "monthly"
+    },
+    {
+      "ledger": [
+        {
+          "date": "2032-02-01",
+          "base": 1300,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2032-02-13",
+          "base": 1200,
+          "extra": 0,
+          "principal": 365000
+        }
+      ],
+      "preview": [
+        {
+          "date": "2032-02-01",
+          "base": 1300,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2032-02-13",
+          "base": 1200,
+          "extra": 0,
+          "principal": 365000
+        }
+      ],
+      "next": "2032-02-01"
+    }
+  ],
+  [
+    "coincident old boundary",
+    {
+      "start": "2032-01-19",
+      "expiry": "2032-02-01",
+      "extended": "2032-03-09",
+      "balance": 365000,
+      "rate": 1000,
+      "extra_rate": 250,
+      "frequency": "monthly"
+    },
+    {
+      "ledger": [
+        {
+          "date": "2032-02-01",
+          "base": 1300,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-01",
+          "base": 2900,
+          "extra": 725,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-09",
+          "base": 800,
+          "extra": 200,
+          "principal": 365000
+        }
+      ],
+      "preview": [
+        {
+          "date": "2032-02-01",
+          "base": 1300,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-01",
+          "base": 2900,
+          "extra": 725,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-09",
+          "base": 800,
+          "extra": 200,
+          "principal": 365000
+        }
+      ],
+      "next": "2032-02-01"
+    }
+  ],
+  [
+    "quarterly straddle",
+    {
+      "start": "2032-01-19",
+      "expiry": "2032-02-13",
+      "extended": "2032-04-08",
+      "balance": 365000,
+      "rate": 1000,
+      "extra_rate": 250,
+      "frequency": "quarterly"
+    },
+    {
+      "ledger": [
+        {
+          "date": "2032-04-01",
+          "base": 7300,
+          "extra": 1200,
+          "principal": 0
+        },
+        {
+          "date": "2032-04-08",
+          "base": 700,
+          "extra": 175,
+          "principal": 365000
+        }
+      ],
+      "preview": [
+        {
+          "date": "2032-04-01",
+          "base": 7300,
+          "extra": 1200,
+          "principal": 0
+        },
+        {
+          "date": "2032-04-08",
+          "base": 700,
+          "extra": 175,
+          "principal": 365000
+        }
+      ],
+      "next": "2032-04-01"
+    }
+  ],
+  [
+    "final regular boundary once",
+    {
+      "start": "2032-01-19",
+      "expiry": "2032-02-13",
+      "extended": "2032-03-01",
+      "balance": 365000,
+      "rate": 1000,
+      "extra_rate": 250,
+      "frequency": "monthly",
+      "as_of": "2032-03-01"
+    },
+    {
+      "ledger": [
+        {
+          "date": "2032-02-01",
+          "base": 1300,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-01",
+          "base": 2900,
+          "extra": 425,
+          "principal": 365000
+        }
+      ],
+      "preview": [
+        {
+          "date": "2032-02-01",
+          "base": 1300,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-01",
+          "base": 2900,
+          "extra": 425,
+          "principal": 365000
+        }
+      ],
+      "next": null
+    }
+  ],
+  [
+    "half up component rounding",
+    {
+      "start": "2031-05-31",
+      "expiry": "2031-06-02",
+      "extended": "2031-06-04",
+      "balance": 182500,
+      "rate": 10,
+      "extra_rate": 10,
+      "frequency": "monthly"
+    },
+    {
+      "ledger": [
+        {
+          "date": "2031-06-01",
+          "base": 1,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2031-06-04",
+          "base": 2,
+          "extra": 1,
+          "principal": 182500
+        }
+      ],
+      "preview": [
+        {
+          "date": "2031-06-01",
+          "base": 1,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2031-06-04",
+          "base": 2,
+          "extra": 1,
+          "principal": 182500
+        }
+      ],
+      "next": "2031-06-01"
+    }
+  ],
+  [
+    "no uplift",
+    {
+      "start": "2032-01-19",
+      "expiry": "2032-02-13",
+      "extended": "2032-03-09",
+      "balance": 365000,
+      "rate": 1000,
+      "extra_rate": 0,
+      "frequency": "monthly"
+    },
+    {
+      "ledger": [
+        {
+          "date": "2032-02-01",
+          "base": 1300,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-01",
+          "base": 2900,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-09",
+          "base": 800,
+          "extra": 0,
+          "principal": 365000
+        }
+      ],
+      "preview": [
+        {
+          "date": "2032-02-01",
+          "base": 1300,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-01",
+          "base": 2900,
+          "extra": 0,
+          "principal": 0
+        },
+        {
+          "date": "2032-03-09",
+          "base": 800,
+          "extra": 0,
+          "principal": 365000
+        }
+      ],
+      "next": "2032-02-01"
+    }
+  ]
+]

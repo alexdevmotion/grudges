@@ -1,0 +1,385 @@
+[
+ [
+  "older revised entry survives",
+  {
+   "rows": [
+    {
+     "id": 51,
+     "group": "batch-r",
+     "sequence": 2,
+     "state": "queued",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": "2032-04-19"
+    },
+    {
+     "id": 52,
+     "group": "batch-r",
+     "sequence": 3,
+     "state": "queued",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": null
+    }
+   ]
+  },
+  [
+   {
+    "group": "batch-r",
+    "id": 51,
+    "state": "queued",
+    "due": "2032-04-07",
+    "arrival": "2032-04-10",
+    "revised": "2032-04-19"
+   }
+  ]
+ ],
+ [
+  "input order independent",
+  {
+   "rows": [
+    {
+     "id": 52,
+     "group": "batch-r",
+     "sequence": 3,
+     "state": "queued",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": null
+    },
+    {
+     "id": 51,
+     "group": "batch-r",
+     "sequence": 2,
+     "state": "queued",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": "2032-04-19"
+    }
+   ]
+  },
+  [
+   {
+    "group": "batch-r",
+    "id": 51,
+    "state": "queued",
+    "due": "2032-04-07",
+    "arrival": "2032-04-10",
+    "revised": "2032-04-19"
+   }
+  ]
+ ],
+ [
+  "state queued",
+  {
+   "rows": [
+    {
+     "id": 68,
+     "group": "batch-r",
+     "sequence": 9,
+     "state": "queued",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": null
+    },
+    {
+     "id": 67,
+     "group": "batch-r",
+     "sequence": 1,
+     "state": "queued",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": "2032-05-04"
+    }
+   ]
+  },
+  [
+   {
+    "group": "batch-r",
+    "id": 67,
+    "state": "queued",
+    "due": "2032-04-07",
+    "arrival": "2032-04-10",
+    "revised": "2032-05-04"
+   }
+  ]
+ ],
+ [
+  "state moving",
+  {
+   "rows": [
+    {
+     "id": 68,
+     "group": "batch-r",
+     "sequence": 9,
+     "state": "queued",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": null
+    },
+    {
+     "id": 67,
+     "group": "batch-r",
+     "sequence": 1,
+     "state": "moving",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": "2032-05-04"
+    }
+   ]
+  },
+  [
+   {
+    "group": "batch-r",
+    "id": 67,
+    "state": "moving",
+    "due": "2032-04-07",
+    "arrival": "2032-04-10",
+    "revised": "2032-05-04"
+   }
+  ]
+ ],
+ [
+  "state retry",
+  {
+   "rows": [
+    {
+     "id": 68,
+     "group": "batch-r",
+     "sequence": 9,
+     "state": "queued",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": null
+    },
+    {
+     "id": 67,
+     "group": "batch-r",
+     "sequence": 1,
+     "state": "retry",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": "2032-05-04"
+    }
+   ]
+  },
+  [
+   {
+    "group": "batch-r",
+    "id": 67,
+    "state": "retry",
+    "due": "2032-04-07",
+    "arrival": "2032-04-10",
+    "revised": "2032-05-04"
+   }
+  ]
+ ],
+ [
+  "state late",
+  {
+   "rows": [
+    {
+     "id": 68,
+     "group": "batch-r",
+     "sequence": 9,
+     "state": "queued",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": null
+    },
+    {
+     "id": 67,
+     "group": "batch-r",
+     "sequence": 1,
+     "state": "late",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": "2032-05-04"
+    }
+   ]
+  },
+  [
+   {
+    "group": "batch-r",
+    "id": 67,
+    "state": "late",
+    "due": "2032-04-07",
+    "arrival": "2032-04-10",
+    "revised": "2032-05-04"
+   }
+  ]
+ ],
+ [
+  "state blocked",
+  {
+   "rows": [
+    {
+     "id": 68,
+     "group": "batch-r",
+     "sequence": 9,
+     "state": "queued",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": null
+    },
+    {
+     "id": 67,
+     "group": "batch-r",
+     "sequence": 1,
+     "state": "blocked",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": "2032-05-04"
+    }
+   ]
+  },
+  [
+   {
+    "group": "batch-r",
+    "id": 67,
+    "state": "blocked",
+    "due": "2032-04-07",
+    "arrival": "2032-04-10",
+    "revised": "2032-05-04"
+   }
+  ]
+ ],
+ [
+  "overdue precedence and sequence",
+  {
+   "rows": [
+    {
+     "id": 73,
+     "group": "batch-r",
+     "sequence": 4,
+     "state": "retry",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": "2032-05-18"
+    },
+    {
+     "id": 74,
+     "group": "batch-r",
+     "sequence": 1,
+     "state": "blocked",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": null
+    },
+    {
+     "id": 75,
+     "group": "batch-r",
+     "sequence": 2,
+     "state": "late",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": null
+    }
+   ]
+  },
+  [
+   {
+    "group": "batch-r",
+    "id": 75,
+    "state": "late",
+    "due": "2032-04-07",
+    "arrival": "2032-04-10",
+    "revised": null
+   }
+  ]
+ ],
+ [
+  "id breaks sequence tie",
+  {
+   "rows": [
+    {
+     "id": 51,
+     "group": "batch-r",
+     "sequence": 2,
+     "state": "queued",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": "2032-04-19"
+    },
+    {
+     "id": 61,
+     "group": "batch-r",
+     "sequence": 2,
+     "state": "retry",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": "2032-04-22"
+    }
+   ]
+  },
+  [
+   {
+    "group": "batch-r",
+    "id": 61,
+    "state": "retry",
+    "due": "2032-04-07",
+    "arrival": "2032-04-10",
+    "revised": "2032-04-22"
+   }
+  ]
+ ],
+ [
+  "groups and complete fallback",
+  {
+   "rows": [
+    {
+     "id": 51,
+     "group": "batch-r",
+     "sequence": 2,
+     "state": "queued",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": "2032-04-19"
+    },
+    {
+     "id": 52,
+     "group": "batch-r",
+     "sequence": 3,
+     "state": "queued",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": null
+    },
+    {
+     "id": 79,
+     "group": "batch-a",
+     "sequence": 5,
+     "state": "complete",
+     "due": "2032-04-07",
+     "planned": "2032-04-10",
+     "revised": null
+    }
+   ]
+  },
+  [
+   {
+    "group": "batch-a",
+    "id": 79,
+    "state": "complete",
+    "due": "2032-04-07",
+    "arrival": "2032-04-10",
+    "revised": null
+   },
+   {
+    "group": "batch-r",
+    "id": 51,
+    "state": "queued",
+    "due": "2032-04-07",
+    "arrival": "2032-04-10",
+    "revised": "2032-04-19"
+   }
+  ]
+ ],
+ [
+  "empty",
+  {
+   "rows": []
+  },
+  []
+ ]
+]

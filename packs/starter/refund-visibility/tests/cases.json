@@ -1,0 +1,575 @@
+[
+  [
+    "en queued surfaces",
+    {
+      "op": "snapshot",
+      "refund": {
+        "id": "refund-az",
+        "state": "queued",
+        "gross": 18730,
+        "fee": 619,
+        "reason": "address mismatch"
+      },
+      "locale": "en"
+    },
+    {
+      "api": {
+        "id": "refund-az",
+        "state": "queued"
+      },
+      "view": {
+        "state": "queued",
+        "label": "Queued"
+      },
+      "email": {
+        "template": "refund-received",
+        "id": "refund-az",
+        "gross": 18730,
+        "fee": 619,
+        "net": 18111,
+        "$keys": [
+          "template",
+          "id",
+          "gross",
+          "fee",
+          "net"
+        ]
+      },
+      "internal": {
+        "state": "queued",
+        "executable": true,
+        "team": null
+      }
+    }
+  ],
+  [
+    "en screened surfaces",
+    {
+      "op": "snapshot",
+      "refund": {
+        "id": "refund-az",
+        "state": "screened",
+        "gross": 18730,
+        "fee": 619,
+        "reason": "address mismatch"
+      },
+      "locale": "en"
+    },
+    {
+      "api": {
+        "id": "refund-az",
+        "state": "queued"
+      },
+      "view": {
+        "state": "queued",
+        "label": "Queued"
+      },
+      "email": {
+        "template": "refund-received",
+        "id": "refund-az",
+        "gross": 18730,
+        "fee": 619,
+        "net": 18111,
+        "$keys": [
+          "template",
+          "id",
+          "gross",
+          "fee",
+          "net"
+        ]
+      },
+      "internal": {
+        "state": "screened",
+        "executable": false,
+        "team": {
+          "id": "refund-az",
+          "reason": "address mismatch"
+        }
+      }
+    }
+  ],
+  [
+    "en sent surfaces",
+    {
+      "op": "snapshot",
+      "refund": {
+        "id": "refund-az",
+        "state": "sent",
+        "gross": 18730,
+        "fee": 619,
+        "reason": "address mismatch"
+      },
+      "locale": "en"
+    },
+    {
+      "api": {
+        "id": "refund-az",
+        "state": "sent"
+      },
+      "view": {
+        "state": "sent",
+        "label": "Sent"
+      },
+      "email": null,
+      "internal": {
+        "state": "sent",
+        "executable": false,
+        "team": null
+      }
+    }
+  ],
+  [
+    "en rejected surfaces",
+    {
+      "op": "snapshot",
+      "refund": {
+        "id": "refund-az",
+        "state": "rejected",
+        "gross": 18730,
+        "fee": 619,
+        "reason": "address mismatch"
+      },
+      "locale": "en"
+    },
+    {
+      "api": {
+        "id": "refund-az",
+        "state": "rejected"
+      },
+      "view": {
+        "state": "rejected",
+        "label": "Rejected"
+      },
+      "email": null,
+      "internal": {
+        "state": "rejected",
+        "executable": false,
+        "team": null
+      }
+    }
+  ],
+  [
+    "en void surfaces",
+    {
+      "op": "snapshot",
+      "refund": {
+        "id": "refund-az",
+        "state": "void",
+        "gross": 18730,
+        "fee": 619,
+        "reason": "address mismatch"
+      },
+      "locale": "en"
+    },
+    {
+      "api": {
+        "id": "refund-az",
+        "state": "void"
+      },
+      "view": {
+        "state": "void",
+        "label": "Cancelled"
+      },
+      "email": null,
+      "internal": {
+        "state": "void",
+        "executable": false,
+        "team": null
+      }
+    }
+  ],
+  [
+    "en legacy view",
+    {
+      "op": "view",
+      "state": "screened",
+      "locale": "en"
+    },
+    {
+      "state": "queued",
+      "label": "Queued"
+    }
+  ],
+  [
+    "nl queued surfaces",
+    {
+      "op": "snapshot",
+      "refund": {
+        "id": "refund-az",
+        "state": "queued",
+        "gross": 18730,
+        "fee": 619,
+        "reason": "address mismatch"
+      },
+      "locale": "nl"
+    },
+    {
+      "api": {
+        "id": "refund-az",
+        "state": "queued"
+      },
+      "view": {
+        "state": "queued",
+        "label": "In wachtrij"
+      },
+      "email": {
+        "template": "refund-received",
+        "id": "refund-az",
+        "gross": 18730,
+        "fee": 619,
+        "net": 18111,
+        "$keys": [
+          "template",
+          "id",
+          "gross",
+          "fee",
+          "net"
+        ]
+      },
+      "internal": {
+        "state": "queued",
+        "executable": true,
+        "team": null
+      }
+    }
+  ],
+  [
+    "nl screened surfaces",
+    {
+      "op": "snapshot",
+      "refund": {
+        "id": "refund-az",
+        "state": "screened",
+        "gross": 18730,
+        "fee": 619,
+        "reason": "address mismatch"
+      },
+      "locale": "nl"
+    },
+    {
+      "api": {
+        "id": "refund-az",
+        "state": "queued"
+      },
+      "view": {
+        "state": "queued",
+        "label": "In wachtrij"
+      },
+      "email": {
+        "template": "refund-received",
+        "id": "refund-az",
+        "gross": 18730,
+        "fee": 619,
+        "net": 18111,
+        "$keys": [
+          "template",
+          "id",
+          "gross",
+          "fee",
+          "net"
+        ]
+      },
+      "internal": {
+        "state": "screened",
+        "executable": false,
+        "team": {
+          "id": "refund-az",
+          "reason": "address mismatch"
+        }
+      }
+    }
+  ],
+  [
+    "nl sent surfaces",
+    {
+      "op": "snapshot",
+      "refund": {
+        "id": "refund-az",
+        "state": "sent",
+        "gross": 18730,
+        "fee": 619,
+        "reason": "address mismatch"
+      },
+      "locale": "nl"
+    },
+    {
+      "api": {
+        "id": "refund-az",
+        "state": "sent"
+      },
+      "view": {
+        "state": "sent",
+        "label": "Verzonden"
+      },
+      "email": null,
+      "internal": {
+        "state": "sent",
+        "executable": false,
+        "team": null
+      }
+    }
+  ],
+  [
+    "nl rejected surfaces",
+    {
+      "op": "snapshot",
+      "refund": {
+        "id": "refund-az",
+        "state": "rejected",
+        "gross": 18730,
+        "fee": 619,
+        "reason": "address mismatch"
+      },
+      "locale": "nl"
+    },
+    {
+      "api": {
+        "id": "refund-az",
+        "state": "rejected"
+      },
+      "view": {
+        "state": "rejected",
+        "label": "Afgewezen"
+      },
+      "email": null,
+      "internal": {
+        "state": "rejected",
+        "executable": false,
+        "team": null
+      }
+    }
+  ],
+  [
+    "nl void surfaces",
+    {
+      "op": "snapshot",
+      "refund": {
+        "id": "refund-az",
+        "state": "void",
+        "gross": 18730,
+        "fee": 619,
+        "reason": "address mismatch"
+      },
+      "locale": "nl"
+    },
+    {
+      "api": {
+        "id": "refund-az",
+        "state": "void"
+      },
+      "view": {
+        "state": "void",
+        "label": "Geannuleerd"
+      },
+      "email": null,
+      "internal": {
+        "state": "void",
+        "executable": false,
+        "team": null
+      }
+    }
+  ],
+  [
+    "nl legacy view",
+    {
+      "op": "view",
+      "state": "screened",
+      "locale": "nl"
+    },
+    {
+      "state": "queued",
+      "label": "In wachtrij"
+    }
+  ],
+  [
+    "da queued surfaces",
+    {
+      "op": "snapshot",
+      "refund": {
+        "id": "refund-az",
+        "state": "queued",
+        "gross": 18730,
+        "fee": 619,
+        "reason": "address mismatch"
+      },
+      "locale": "da"
+    },
+    {
+      "api": {
+        "id": "refund-az",
+        "state": "queued"
+      },
+      "view": {
+        "state": "queued",
+        "label": "I kø"
+      },
+      "email": {
+        "template": "refund-received",
+        "id": "refund-az",
+        "gross": 18730,
+        "fee": 619,
+        "net": 18111,
+        "$keys": [
+          "template",
+          "id",
+          "gross",
+          "fee",
+          "net"
+        ]
+      },
+      "internal": {
+        "state": "queued",
+        "executable": true,
+        "team": null
+      }
+    }
+  ],
+  [
+    "da screened surfaces",
+    {
+      "op": "snapshot",
+      "refund": {
+        "id": "refund-az",
+        "state": "screened",
+        "gross": 18730,
+        "fee": 619,
+        "reason": "address mismatch"
+      },
+      "locale": "da"
+    },
+    {
+      "api": {
+        "id": "refund-az",
+        "state": "queued"
+      },
+      "view": {
+        "state": "queued",
+        "label": "I kø"
+      },
+      "email": {
+        "template": "refund-received",
+        "id": "refund-az",
+        "gross": 18730,
+        "fee": 619,
+        "net": 18111,
+        "$keys": [
+          "template",
+          "id",
+          "gross",
+          "fee",
+          "net"
+        ]
+      },
+      "internal": {
+        "state": "screened",
+        "executable": false,
+        "team": {
+          "id": "refund-az",
+          "reason": "address mismatch"
+        }
+      }
+    }
+  ],
+  [
+    "da sent surfaces",
+    {
+      "op": "snapshot",
+      "refund": {
+        "id": "refund-az",
+        "state": "sent",
+        "gross": 18730,
+        "fee": 619,
+        "reason": "address mismatch"
+      },
+      "locale": "da"
+    },
+    {
+      "api": {
+        "id": "refund-az",
+        "state": "sent"
+      },
+      "view": {
+        "state": "sent",
+        "label": "Sendt"
+      },
+      "email": null,
+      "internal": {
+        "state": "sent",
+        "executable": false,
+        "team": null
+      }
+    }
+  ],
+  [
+    "da rejected surfaces",
+    {
+      "op": "snapshot",
+      "refund": {
+        "id": "refund-az",
+        "state": "rejected",
+        "gross": 18730,
+        "fee": 619,
+        "reason": "address mismatch"
+      },
+      "locale": "da"
+    },
+    {
+      "api": {
+        "id": "refund-az",
+        "state": "rejected"
+      },
+      "view": {
+        "state": "rejected",
+        "label": "Afvist"
+      },
+      "email": null,
+      "internal": {
+        "state": "rejected",
+        "executable": false,
+        "team": null
+      }
+    }
+  ],
+  [
+    "da void surfaces",
+    {
+      "op": "snapshot",
+      "refund": {
+        "id": "refund-az",
+        "state": "void",
+        "gross": 18730,
+        "fee": 619,
+        "reason": "address mismatch"
+      },
+      "locale": "da"
+    },
+    {
+      "api": {
+        "id": "refund-az",
+        "state": "void"
+      },
+      "view": {
+        "state": "void",
+        "label": "Annulleret"
+      },
+      "email": null,
+      "internal": {
+        "state": "void",
+        "executable": false,
+        "team": null
+      }
+    }
+  ],
+  [
+    "da legacy view",
+    {
+      "op": "view",
+      "state": "screened",
+      "locale": "da"
+    },
+    {
+      "state": "queued",
+      "label": "I kø"
+    }
+  ]
+]

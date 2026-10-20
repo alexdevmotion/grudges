@@ -1,0 +1,1264 @@
+[
+  [
+    "sms memory=True acknowledge via action",
+    {
+      "mode": "sms",
+      "storage_available": true,
+      "events": [
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "action"
+        },
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-8",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-9",
+            "state": "cancelled"
+          }
+        }
+      ]
+    },
+    [
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-8"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-8"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-9"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-9"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "sms memory=True acknowledge via dismiss",
+    {
+      "mode": "sms",
+      "storage_available": true,
+      "events": [
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "dismiss"
+        },
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-8",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-9",
+            "state": "cancelled"
+          }
+        }
+      ]
+    },
+    [
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-8"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-8"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-9"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-9"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "sms memory=True acknowledge via close",
+    {
+      "mode": "sms",
+      "storage_available": true,
+      "events": [
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "close"
+        },
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-8",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-9",
+            "state": "cancelled"
+          }
+        }
+      ]
+    },
+    [
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": false,
+        "children": []
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-8"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-8"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-9"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-9"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "sms memory=False acknowledge via action",
+    {
+      "mode": "sms",
+      "storage_available": false,
+      "events": [
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "action"
+        },
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-8",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-9",
+            "state": "cancelled"
+          }
+        }
+      ]
+    },
+    [
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-8"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-8"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-9"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-9"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "sms memory=False acknowledge via dismiss",
+    {
+      "mode": "sms",
+      "storage_available": false,
+      "events": [
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "dismiss"
+        },
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-8",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-9",
+            "state": "cancelled"
+          }
+        }
+      ]
+    },
+    [
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-8"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-8"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-9"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-9"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "sms memory=False acknowledge via close",
+    {
+      "mode": "sms",
+      "storage_available": false,
+      "events": [
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "close"
+        },
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-8",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-9",
+            "state": "cancelled"
+          }
+        }
+      ]
+    },
+    [
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": false,
+        "children": []
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-8"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-8"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-9"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-9"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "sms active and draft forms",
+    {
+      "mode": "sms",
+      "storage_available": true,
+      "events": [
+        {
+          "type": "open",
+          "latest": null
+        },
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-3",
+            "state": "active"
+          }
+        },
+        {
+          "type": "close"
+        }
+      ]
+    },
+    [
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "draft"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-3"
+          }
+        ]
+      },
+      {
+        "open": false,
+        "children": []
+      }
+    ]
+  ],
+  [
+    "desk memory=True acknowledge via action",
+    {
+      "mode": "desk",
+      "storage_available": true,
+      "events": [
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "action"
+        },
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-8",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-9",
+            "state": "cancelled"
+          }
+        }
+      ]
+    },
+    [
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-8"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-8"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-9"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-9"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "desk memory=True acknowledge via dismiss",
+    {
+      "mode": "desk",
+      "storage_available": true,
+      "events": [
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "dismiss"
+        },
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-8",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-9",
+            "state": "cancelled"
+          }
+        }
+      ]
+    },
+    [
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-8"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-8"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-9"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-9"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "desk memory=True acknowledge via close",
+    {
+      "mode": "desk",
+      "storage_available": true,
+      "events": [
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "close"
+        },
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-8",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-9",
+            "state": "cancelled"
+          }
+        }
+      ]
+    },
+    [
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": false,
+        "children": []
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-8"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-8"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-9"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-9"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "desk memory=False acknowledge via action",
+    {
+      "mode": "desk",
+      "storage_available": false,
+      "events": [
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "action"
+        },
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-8",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-9",
+            "state": "cancelled"
+          }
+        }
+      ]
+    },
+    [
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-8"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-8"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-9"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-9"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "desk memory=False acknowledge via dismiss",
+    {
+      "mode": "desk",
+      "storage_available": false,
+      "events": [
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "dismiss"
+        },
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-8",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-9",
+            "state": "cancelled"
+          }
+        }
+      ]
+    },
+    [
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-8"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-8"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-9"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-9"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "desk memory=False acknowledge via close",
+    {
+      "mode": "desk",
+      "storage_available": false,
+      "events": [
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "close"
+        },
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-7",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-8",
+            "state": "cancelled"
+          }
+        },
+        {
+          "type": "cancel",
+          "inspection": {
+            "id": "inspect-9",
+            "state": "cancelled"
+          }
+        }
+      ]
+    },
+    [
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": false,
+        "children": []
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-7"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-8"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-8"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-9"
+          },
+          {
+            "kind": "notice",
+            "id": "inspect-9"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "desk active and draft forms",
+    {
+      "mode": "desk",
+      "storage_available": true,
+      "events": [
+        {
+          "type": "open",
+          "latest": null
+        },
+        {
+          "type": "open",
+          "latest": {
+            "id": "inspect-3",
+            "state": "active"
+          }
+        },
+        {
+          "type": "close"
+        }
+      ]
+    },
+    [
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "draft"
+          }
+        ]
+      },
+      {
+        "open": true,
+        "children": [
+          {
+            "kind": "form",
+            "id": "inspect-3"
+          }
+        ]
+      },
+      {
+        "open": false,
+        "children": []
+      }
+    ]
+  ]
+]
