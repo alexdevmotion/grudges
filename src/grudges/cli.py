@@ -2,11 +2,12 @@ import argparse
 import json
 import os
 import shutil
+import subprocess
 import sys
 from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
-from . import build, card, hook, install, run, save, snapshot, store
+from . import build, card, hook, install, local, run, save, snapshot, store
 
 
 def _default_claude_dirs():
@@ -54,7 +55,7 @@ def cmd_show(a):
 
 
 def cmd_run(a):
-    if not a.model and a.agent not in ("nop", "oracle"):
+    if a.runner == "harbor" and not a.model and a.agent not in ("nop", "oracle"):
         raise SystemExit("grudges: pass at least one -m MODEL")
     rules = a.rules.read_text() if a.rules else None
     tasks = list(a.tasks)
@@ -62,14 +63,23 @@ def cmd_run(a):
         tasks.append(pack_path(a.pack))
     if not tasks:
         raise SystemExit("grudges: provide task directories or --pack starter / starter-intent")
-    run_dir, result = run.replay(tasks, a.agent, a.model, attempts=a.attempts, effort=a.effort,
-                                 concurrency=a.concurrency, rules=rules)
+    if a.runner == "harbor":
+        run_dir, result = run.replay(tasks, a.agent, a.model, attempts=a.attempts, effort=a.effort,
+                                     concurrency=a.concurrency or 4, rules=rules)
+    else:
+        if a.concurrency not in (None, 1):
+            raise ValueError("subscription runners are sequential; use --concurrency 1")
+        if a.agent != "codex":
+            raise ValueError("--agent selects Harbor agents; choose --runner local-codex or local-claude")
+        run_dir, result = local.replay(tasks, a.runner, a.model, attempts=a.attempts, effort=a.effort,
+                                      rules=rules, trust_local=a.trust_local)
     for label, s in result["summary"].items():
         errs = ", ".join(f"{n} {k}" for k, n in s["errors"].items()) or "no errors"
         print(f"{label}: fixed {s['fixed']}/{s['n_tasks']} · attempts {s['attempts_solved']}/{s['attempts_scored']} · {errs}")
     print(f"results: {run_dir / 'results.json'}")
     print(f"card: {card.write(run_dir)}")
-    return 2 if (result["harbor_exit_code"] or not result["records"] or
+    return 2 if (result.get("harbor_exit_code", 0) or result.get("interrupted")
+                 or not result.get("complete", True) or not result["records"] or
                  any(s["errors"] for s in result["summary"].values())) else 0
 
 
@@ -142,14 +152,16 @@ def main(argv=None):
     sh = sub.add_parser("show", help="print a grudge's metadata")
     sh.add_argument("id")
 
-    rn = sub.add_parser("run", help="replay tasks across models with Harbor")
+    rn = sub.add_parser("run", help="replay tasks with Harbor or a local subscription CLI")
     rn.add_argument("tasks", nargs="*", type=Path, help="task directories or pack directories")
     rn.add_argument("--pack", choices=["starter", "starter-intent"], help="run a bundled example pack")
     rn.add_argument("-a", "--agent", default="codex")
-    rn.add_argument("-m", "--model", action="append", default=[], help="repeatable; required except for nop/oracle")
+    rn.add_argument("-m", "--model", action="append", default=[], help="repeatable; local runners default to their CLI model")
     rn.add_argument("-k", "--attempts", type=positive, default=3)
     rn.add_argument("--effort")
-    rn.add_argument("-n", "--concurrency", type=positive, default=4, help="parallel trials (default 4)")
+    rn.add_argument("-n", "--concurrency", type=positive, default=None, help="parallel Harbor trials (default 4); local runners use 1")
+    rn.add_argument("--runner", choices=["harbor", "local-codex", "local-claude"], default="harbor", help="Harbor API replay or installed subscription CLI")
+    rn.add_argument("--trust-local", action="store_true", help="acknowledge local tasks run on your host; use reviewed tasks only")
     rn.add_argument("--rules", type=Path, help="compare tasks as captured against a copy with your project rules")
 
     b = sub.add_parser("build", help="turn a grudge into a Harbor task with your agent")
@@ -172,7 +184,7 @@ def main(argv=None):
         return hook.main()
     try:
         return {"save": cmd_save, "requests": cmd_requests, "list": cmd_list, "show": cmd_show, "build": cmd_build, "run": cmd_run, "card": cmd_card, "install": cmd_install}[a.cmd](a) or 0
-    except (OSError, ValueError, RuntimeError) as exc:
+    except (OSError, ValueError, RuntimeError, subprocess.SubprocessError) as exc:
         print(f"grudges: {exc}", file=sys.stderr)
         return 2
 

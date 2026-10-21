@@ -121,6 +121,7 @@ def summarize(records):
             "median_seconds": _median([r["seconds"] for r in scored if r["seconds"] is not None]),
             "output_tokens": _sum_known(rs, "output_tokens"),
             "cost_usd": _sum_known(rs, "cost_usd"),
+            "billing": "subscription" if all(r.get("billing") == "subscription" for r in rs) else None,
             "cost_complete": all(r["cost_usd"] is not None for r in rs),
         }
     return out

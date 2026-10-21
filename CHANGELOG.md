@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0a1 — 2026-10-21
+
+- Subscription replay through installed Codex and Claude CLIs, with native login and no API fallback.
+- Sequential trusted local workspaces, baseline/reference controls, and offline Docker verification.
+- Frozen rules comparisons, durable attempt receipts, and subscription-aware cost labels.
+- Explicit tool-profile and host-isolation limitations; errors stop further allowance use.
+
 ## 0.1.0a1 — 2026-10-20
 
 - Local failure capture, request selection and interactive Harbor task authoring.
