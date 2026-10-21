@@ -27,7 +27,7 @@ def _tally(n_tasks, fixed, width=560, height=64):
     return f'<svg viewBox="0 0 {width} {height}" class="tally" aria-hidden="true">{"".join(parts)}</svg>'
 
 
-HARNESS_NAMES = {"codex": "Codex", "claude-code": "Claude Code", "opencode": "OpenCode", "terminus-2": "Terminus"}
+HARNESS_NAMES = {"local-codex": "local Codex", "local-claude": "local Claude Code", "codex": "Codex", "claude-code": "Claude Code", "opencode": "OpenCode", "terminus-2": "Terminus"}
 
 
 def _who(label):
@@ -42,7 +42,9 @@ def _who(label):
 
 def _spend(s):
     parts = []
-    if s.get("cost_usd") is not None:
+    if s.get("billing") == "subscription":
+        parts.append("subscription usage · USD cost unavailable")
+    elif s.get("cost_usd") is not None:
         parts.append(f"${s['cost_usd']:.2f}" + (" known cost (partial)" if s.get("cost_complete") is False else ""))
     else:
         parts.append("cost unavailable")
@@ -118,6 +120,8 @@ def render(result, titles=None):
         subject = f"{_n(n_tasks, 'task')} my coding agent failed"
     footer = (f"{expected} planned attempts per task/setup. Errors excluded from scored; missing = planned but unreported. "
               "Majority-fixed = all planned attempts scored and more than half solved.")
+    if result.get("runner", "").startswith("local-"):
+        footer += " Trusted local CLI run; host configuration may affect results. Not equivalent to isolated Harbor runs."
     body = []
     for i, t in enumerate(tasks + [None] * (n_tasks - len(tasks)), 1):
         cells = []

@@ -38,3 +38,11 @@ class CliTest(unittest.TestCase):
                  patch.object(cli.card, "write", return_value=Path("/tmp/card.html")), \
                  contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(cli.main(["run", "--pack", "starter", "-a", "nop"]), code)
+
+    def test_interrupted_or_incomplete_local_run_returns_nonzero(self):
+        for fields in ({'interrupted': True}, {'complete': False}):
+            result = {'records': [{'status': 'missing'}], 'summary': {}, **fields}
+            with patch.object(cli.local, 'replay', return_value=(Path('/tmp/receipt'), result)), \
+                 patch.object(cli.card, 'write', return_value=Path('/tmp/card.html')), \
+                 contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(cli.main(['run','--pack','starter','--runner','local-claude','--trust-local']), 2)

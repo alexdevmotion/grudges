@@ -39,7 +39,7 @@ Local capture. No telemetry. Open source. Task authoring and model replay use yo
 **Python 3.11+ and Git.** Install the published alpha with [uv](https://docs.astral.sh/uv/):
 
 ```bash
-uv tool install https://github.com/alexdevmotion/grudges/releases/download/v0.1.0a1/grudges-0.1.0a1-py3-none-any.whl
+uv tool install https://github.com/alexdevmotion/grudges/releases/download/v0.2.0a1/grudges-0.2.0a1-py3-none-any.whl
 grudges --help
 ```
 
@@ -92,6 +92,21 @@ Building opens an interactive authoring session. **Review the reconstructed task
 
 Capture preserves your working tree, normal Git index and branches. Missing checkpoints are labeled approximate. To remove the managed hooks and unchanged managed skills: `grudges install --uninstall`.
 
+## Replay with the subscription you already have
+
+Sign in with `codex login` or `claude auth login`, then run a reviewed task:
+
+```bash
+grudges run path/to/task --runner local-codex --trust-local -k 1
+grudges run path/to/task --runner local-claude --trust-local -m sonnet -k 1
+# Compare the same task with your project rules:
+grudges run path/to/task --runner local-codex --trust-local --rules ./AGENTS.md -k 3
+```
+
+No API key required. Grudges invokes your installed CLI with its existing login; credentials stay with the CLI. Runs consume your plan's allowance, execute sequentially, and stop on runner errors. Docker checks the baseline and reference solution before the first model attempt, then grades each candidate offline.
+
+**Trusted local mode:** agents run on your host. Codex has a workspace shell; Claude uses restricted file-editing tools. Hidden tests are kept outside the working directory, but this is not a security boundary or a fair cross-agent benchmark. [Requirements and limitations](docs/usage.md#subscription-runners).
+
 ## Replay the same task. Change one thing.
 
 Set `OPENAI_API_KEY` in your environment for Codex replay. Use model IDs available to your account; live runs incur provider charges.
@@ -110,22 +125,22 @@ grudges run path/to/task -a codex \
   -m YOUR_MODEL_ID --rules ./AGENTS.md -k 3
 ```
 
-The two arms are **as captured** and **with rules**. Existing baseline rules are retained; the second copy replaces the root harness rules file. Inputs are frozen before execution. Native Codex and Claude Code replay use API keys, not subscription logins. See [supported rules layouts and behavior](docs/usage.md#try-a-pack).
+The two arms are **as captured** and **with rules**. Existing baseline rules are retained; the second copy replaces the root harness rules file. Inputs are frozen before execution. The default Harbor runner uses API keys. Choose a local runner above to use your subscription. See [supported rules layouts and behavior](docs/usage.md#try-a-pack).
 
 ## Scores you can inspect
 
 | What you see | What it means |
 | --- | --- |
-| Solved / scored | Successful attempts out of valid scored attempts; timeouts count as failures. |
+| Solved / scored | Successful attempts out of valid scored attempts; Harbor agent timeouts count as failures. |
 | Errors & missing | Provider, grader and infrastructure errors, plus planned attempts with no receipt. |
 | Majority-fixed | Every planned attempt was scored and strictly more than half solved the task. |
 | Cost | Reported usage, with unavailable or partial totals labeled. |
 
-Each run keeps `results.json`, the HTML card and Harbor receipts locally. A whole-task score doesn't tell you which requirement failed; inspect the verifier output. You can [set public titles and regenerate a card](docs/usage.md#read-results) before sharing it.
+Each run keeps `results.json`, the HTML card and runner receipts locally. A whole-task score doesn't tell you which requirement failed; inspect the verifier output. You can [set public titles and regenerate a card](docs/usage.md#read-results) before sharing it.
 
 ## Built on tools that already work
 
-Grudges handles capture, replay comparisons and reporting. [evals-from-sessions](https://github.com/ibragim-bad/evals-from-sessions) supplies the task-authoring workflow; [Harbor](https://github.com/harbor-framework/harbor) runs the tasks.
+Grudges handles capture, replay comparisons and reporting. [evals-from-sessions](https://github.com/ibragim-bad/evals-from-sessions) supplies the task-authoring workflow; [Harbor](https://github.com/harbor-framework/harbor) runs API tasks; installed Codex and Claude CLIs run subscription tasks.
 
 The example packs include [eight explicit tasks](packs/starter/README.md) and [six intent tasks](packs/starter-intent/README.md). Their fairness notes distinguish stated requirements from inferred behavior. [Release checks](RELEASE-CHECKS.md) document what has actually been validated.
 

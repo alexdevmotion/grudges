@@ -1,3 +1,20 @@
+# Local release validation — 0.2.0a1
+
+21 October 2026. Linux; GitHub prerelease preparation.
+
+- Python 3.11 and 3.13: 78 tests passed, one optional external-receipt test skipped.
+- All 14 bundled tasks passed local baseline/reference controls (28 offline Docker verifier runs): broken inputs fail and reference solutions pass through the actual local-runner mounts and UID.
+- Live subscription replay passed for Codex CLI 0.163.0 (`gpt-6.1-sol`) and Claude Code (`sonnet`). Each completed a one-attempt, two-setup comparison on `starter/blur-formatting`.
+- Both rules canaries were absent from baseline candidates and present only in the rules candidates; all four final task attempts solved. This verifies rule delivery and replay mechanics, not rule effectiveness or model quality.
+- Restricted Claude did not automatically load root `CLAUDE.md` in direct canary tests. The runner now explicitly includes it in the prompt; unit and live tests cover that behavior.
+- Review fixes include reward-file grading despite nonzero verifier exit, writable disposable verification copies, host UID permissions, paired setup ordering, subscription receipts, timing, interruption and conservative error handling.
+- Desktop (1280px) and mobile (390px) cards checked in a browser; no page overflow at 390px. Subscription cost and trusted-host limitations remain visible.
+- Release packaging and fresh installed-wheel checks cover both packs and CLI entry points. Source secret scan passed. Raw model transcripts and credentials are excluded from the release.
+
+Subscription tests consumed plan allowance. Local runners use different tool profiles and do not isolate the agent from the host; they are not equivalent to isolated Harbor evaluations. API replay remains available. Local subscription mode supports Linux and the documented source-task layout only.
+
+---
+
 # Local release validation — 0.1.0a1
 
 20 October 2026. Linux only. Pre-publication validation record. See the GitHub release for publication status.
