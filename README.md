@@ -6,7 +6,7 @@
 
 Check whether a new model or project rule fixes the mistakes your coding agent already made.
 
-Uses your Codex or Claude subscription. No API key. No Docker.
+Uses your Codex or Claude subscription.
 
 [![CI](https://github.com/alexdevmotion/grudges/actions/workflows/ci.yml/badge.svg)](https://github.com/alexdevmotion/grudges/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/alexdevmotion/grudges?include_prereleases&color=e9a745)](https://github.com/alexdevmotion/grudges/releases)
@@ -42,7 +42,7 @@ uv tool install git+https://github.com/alexdevmotion/grudges@v0.3.0a1
 grudges run
 ```
 
-**No API key, Docker, or Harbor required.** Grudges chooses your installed CLI (Codex if both are present), checks the broken input and reference fix, runs one attempt, and prints a results card. It uses your subscription allowance.
+Grudges chooses your installed CLI (Codex if both are present), checks the broken input and reference fix, runs one attempt, and prints a results card. It uses your subscription allowance.
 
 ```bash
 grudges run --agent claude       # choose Claude

@@ -2,7 +2,7 @@
 
 Eight small, re-authored, headless Python 3.13 tasks. Each is a fresh behavioral analogue of an authorized private session; no original repository code, transcript, customer data or provenance is included. All tasks are labelled **routine**: requirements are explicit; the work is finding and repairing the relevant implementation across a few modules. Human completion times and current-model difficulty are unmeasured. Some seeds are historical bug repairs or user-requested improvements rather than a proven correction of the source agent's own work.
 
-With Codex or Claude signed in, run the pack locally (no Docker or API key):
+With Codex or Claude signed in, run the pack locally:
 
 ```sh
 grudges run --pack starter

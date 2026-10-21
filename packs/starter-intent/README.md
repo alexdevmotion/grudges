@@ -8,7 +8,7 @@ Each task is an offline Python CLI. Environments and reference solutions are unc
 
 Initial mechanical validation used Harbor `nop` and `oracle`, with five attempts each per kept task and one hand-authored near miss per task. Fresh rewards and exception checks are recorded in [validation/RESULTS.md](validation/RESULTS.md). Later calibration prompted the task-specific corrections recorded in FAIRNESS.md; the validation summary describes the initial mechanical checks. No credentials or subscription sessions are mounted into the containers.
 
-Run locally with your signed-in Codex or Claude CLI; no Docker or API key:
+Run locally with your signed-in Codex or Claude CLI:
 
 ```sh
 grudges run --pack starter-intent
