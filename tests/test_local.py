@@ -16,8 +16,7 @@ class LocalTest(unittest.TestCase):
         (task / 'tests').mkdir()
         (task / 'solution').mkdir()
         (task / 'solution/solve.sh').write_text('true')
-        (task / 'task.toml').write_text('[task]\nname="test/task"\n')
-        (task / 'environment/Dockerfile').write_text('FROM python:3.13-slim\nWORKDIR /app\nCOPY repo/ /app/\n')
+        (task / 'task.toml').write_text('[task]\nname="test/task"\n[local]\nverify=["{python}","{task}/tests/verify.py"]\nsolve=["bash","{task}/solution/solve.sh"]\n')
         (task / 'environment/repo/app.py').write_text('broken = True\n')
         (task / 'instruction.md').write_text('Fix app.py')
         (task / 'tests/test.sh').write_text('exit 0')
@@ -42,12 +41,6 @@ class LocalTest(unittest.TestCase):
         self.assertNotIn('--dangerously-skip-permissions',c)
         self.assertIn('Read,Edit,Write,Glob,Grep',c)
         self.assertIn('claudeai',c[c.index('--settings')+1])
-
-    def test_requires_explicit_trust_before_any_process(self):
-        with patch.object(local.subprocess,'run') as proc:
-            with self.assertRaisesRegex(ValueError,'trust-local'):
-                local.replay([], 'local-codex', [])
-            proc.assert_not_called()
 
     def test_auth_rejects_api_login(self):
         with patch.object(local.shutil,'which',return_value='/bin/agent'), patch.object(local.subprocess,'run') as proc:
@@ -99,11 +92,11 @@ class LocalTest(unittest.TestCase):
                 trial.mkdir()
                 with patch.object(local, 'verify', side_effect=outcomes) as verify:
                     if i == 0:
-                        local.controls(task, 'image', trial, {}, 30)
+                        local.controls(task, trial, {}, 30)
                         self.assertEqual([c.kwargs['oracle'] for c in verify.call_args_list], [False, True])
                     else:
                         with self.assertRaisesRegex(ValueError, 'control returned'):
-                            local.controls(task, 'image', trial, {}, 30)
+                            local.controls(task, trial, {}, 30)
 
     def test_claude_root_rules_are_explicit_even_with_settings_disabled(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -123,10 +116,10 @@ class LocalTest(unittest.TestCase):
         phases=[]
         def execute(cmd,cwd,env,log,timeout,prompt=None):
             phases.append(cmd)
-            if cmd[0]=='docker':
+            self.assertNotEqual(cmd[0], 'docker')
+            if cmd[0]=='git':
                 if failure=='setup-timeout':raise subprocess.TimeoutExpired(cmd,timeout)
                 return 0
-            if cmd[0]=='git':return 0
             self.assertFalse((cwd/'tests').exists())
             self.assertFalse((cwd/'solution').exists())
             if failure=='agent-timeout':raise subprocess.TimeoutExpired(cmd,timeout)
@@ -191,17 +184,21 @@ class LocalTest(unittest.TestCase):
         r=self.exercise('agent-timeout')
         self.assertEqual([x['status'] for x in r['records']],['infra_error','missing','missing','missing'])
 
-    def test_verifier_has_no_network_and_readonly_inputs(self):
+    def test_native_verifier_uses_disposable_copy_and_exit_status(self):
         with tempfile.TemporaryDirectory() as tmp:
-            t=self.task(tmp);trial=Path(tmp)/'trial';trial.mkdir()
-            def execute(cmd,cwd,env,log,timeout):
-                self.assertEqual(cmd[cmd.index('--network')+1], 'none')
-                self.assertEqual(cmd[cmd.index('--user')+1], f'{os.getuid()}:{os.getgid()}')
-                mounts=[cmd[i+1] for i,v in enumerate(cmd) if v=='--mount']
-                self.assertTrue(all('readonly' in m for m in mounts if 'dst=/tests' in m))
-                (trial/'verifier/reward.txt').write_text('1')
-                return 1
-            with patch.object(local,'execute',side_effect=execute),patch.object(local.subprocess,'run'):
-                self.assertEqual(local.verify(t,t/'environment/repo','image',trial,{},30),'solved')
+            task = self.task(tmp)
+            (task/'tests/verify.py').write_text("from pathlib import Path\nPath('app.py').write_text('changed')\nraise SystemExit(1)\n")
+            trial = Path(tmp)/'trial'; trial.mkdir()
+            self.assertEqual(local.verify(task,task/'environment/repo',trial,local.environment(),30), 'failed')
+            self.assertEqual((task/'environment/repo/app.py').read_text(), 'broken = True\n')
+            self.assertEqual((trial/'verifier-exit-code').read_text(), '1')
+
+    def test_all_bundled_native_controls_without_docker(self):
+        from grudges.cli import pack_path
+        with tempfile.TemporaryDirectory() as tmp:
+            for pack in ('starter','starter-intent'):
+                for task in sorted(pack_path(pack).glob('*/task.toml')):
+                    trial=Path(tmp)/pack/task.parent.name; trial.mkdir(parents=True)
+                    local.controls(task.parent.resolve(),trial,local.environment(),30)
 
 if __name__=='__main__':unittest.main()

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0a1 — 2026-10-21
+
+- Native subscription replay is now the default: `grudges run` tries one starter task once.
+- Docker-free verification through explicit local task commands; all bundled tasks support it.
+- Choose Claude with `--agent claude`; API/Harbor replay is an advanced alternative.
+- Removed the redundant trust flag from normal usage and simplified onboarding.
+
 ## 0.2.0a1 — 2026-10-21
 
 - Subscription replay through installed Codex and Claude CLIs, with native login and no API fallback.
