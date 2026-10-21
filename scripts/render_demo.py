@@ -19,7 +19,7 @@ scenes = [
  ('01 / CAPTURE', 'Don’t lose the failure.', 'A tiny local fixture. A mistake worth keeping.',
   ['$ grudges save --session demo '+chr(92), '  --note "Keep the amount editable until blur."', '', *DATA['capture'].splitlines()],
   'Starting code + failed attempt, pinned locally.'),
- ('02 / REPLAY', 'Use the plan you already have.', 'One starter task. One attempt. No Docker.',
+ ('02 / REPLAY', 'Use the plan you already have.', 'One starter task. One attempt.',
   ['$ grudges run -m gpt-6.1-sol --effort low', '',
    'Using codex subscription · local verification',
    'Checking starter/blur-formatting (as captured)…', '',

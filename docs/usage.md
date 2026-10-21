@@ -19,7 +19,7 @@ grudges run path/to/task --agent claude --rules ./CLAUDE.md
 
 `-m MODEL` selects a model your subscription supports; omit it for the CLI default. Repeat `-m` to compare models. `--effort` forwards the CLI effort setting. Runs are sequential. `--runner local-codex` and `--runner local-claude` remain compatible aliases; `--trust-local` is no longer required.
 
-Requirements: Linux, Git, and a recent signed-in official CLI. uv provides the Python runtime. Bundled tasks use only Python's standard library and Bash. No Docker daemon or Harbor installation is needed. Custom tasks may have additional documented host dependencies.
+Requirements: Linux, Git, and a recent signed-in official CLI. uv provides the Python runtime. Bundled tasks use only Python's standard library and Bash. Custom tasks may have additional documented host dependencies.
 
 ## How local verification works
 
