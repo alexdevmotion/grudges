@@ -1,69 +1,140 @@
+<div align="center">
+
 # grudges
 
-Save the tasks your coding agent failed. Replay them on another model—or check whether your project rules help.
+### Your agent forgot. Keep receipts.
 
-**Local alpha, 0.1.0a1.** Not yet published to PyPI. Linux is the tested platform. The example packs demonstrate the workflow; they are not a representative model leaderboard.
+Save coding-agent failures. Replay them across models. Find out whether your rules actually help.
 
-## Try a pack
+[![CI](https://github.com/alexdevmotion/grudges/actions/workflows/ci.yml/badge.svg)](https://github.com/alexdevmotion/grudges/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/alexdevmotion/grudges?include_prereleases&color=e9a745)](https://github.com/alexdevmotion/grudges/releases)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
-From this checkout, with Python 3.11+ and Git:
+[Get started](#get-started) · [Capture a failure](#capture-the-next-failure) · [Compare models & rules](#replay-the-same-task-change-one-thing) · [Docs](docs/usage.md)
+
+<picture>
+<source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/demo.png">
+<img src="docs/assets/demo.gif" alt="Grudges demo: capture an exact starting state, replay bundled tasks with nop and oracle controls, and inspect solved-attempt counts." width="900">
+</picture>
+
+<sub>Edited walkthrough: real local capture and verified starter-pack controls. No model API calls. [Static version](docs/assets/demo.png) · [Demo source & transcript](docs/demo.md)</sub>
+
+</div>
+
+## Turn “not this again” into a test
+
+Your agent fixed the wrong thing. A new model repeats an old mistake. You added another paragraph to `AGENTS.md`, but you don't know whether it helped.
+
+**Grudges gives those moments a memory.** Capture the starting code and failed attempt, build a task with a verifier you review, then replay it under another model or another set of rules.
+
+- **Save the evidence.** A prompt hook captures the starting state; `/grudge` or `$grudge` pins it alongside the failed attempt and session.
+- **Test your own work.** Turn a captured failure into a Harbor task, with human review of the reconstruction and verifier.
+- **Compare repeat attempts.** Run the same frozen task across models or compare it as captured against a copy with your rules.
+- **Read the whole result.** HTML cards show solved/scored counts, missing attempts, errors and partial costs.
+
+Local capture. No telemetry. Open source. Task authoring and model replay use your configured providers.
+
+## Get started
+
+**Python 3.11+ and Git.** Install the published alpha with [uv](https://docs.astral.sh/uv/):
 
 ```bash
+uv tool install https://github.com/alexdevmotion/grudges/releases/download/v0.1.0a1/grudges-0.1.0a1-py3-none-any.whl
+grudges --help
+```
+
+<details>
+<summary>Install from source instead</summary>
+
+```bash
+git clone https://github.com/alexdevmotion/grudges.git
+cd grudges
 uv tool install .
-grudges --version
+```
+
+</details>
+
+**Try a replay without an API key.** You'll also need a running Docker daemon with Compose and Buildx:
+
+```bash
 uv tool install 'harbor==0.24.0'
-# Requires a running Docker daemon with Compose and Buildx.
 grudges run --pack starter -a nop -k 1
 grudges run --pack starter -a oracle -k 1
 ```
 
-These controls make no model API calls: nop checks the starting implementation; oracle runs the reference solution. Docker may download images. The wheel includes eight explicit starter tasks and six intent tasks (`--pack starter-intent`). Read each pack's README and FAIRNESS notes before interpreting results.
+`nop` leaves the broken code alone; `oracle` runs the reference fix. Expect **0/8** and **8/8** solved. Open the `card.html` path printed after each run. These controls make no model calls; Docker may download images.
 
-For a model run, set `OPENAI_API_KEY` in your environment and choose a model available to your account:
+> **Alpha:** Linux tested; macOS and Windows unvalidated. Available on GitHub, not PyPI. The 14 bundled tasks demonstrate the workflow, not a representative model leaderboard.
 
-```bash
-grudges run --pack starter -a codex -m YOUR_MODEL_ID -k 3
-grudges run path/to/task -a codex -m YOUR_MODEL_ID --rules ./AGENTS.md
-```
+## Capture the next failure
 
-Live runs cost money. Codex and Claude Code replay require provider API keys; subscription credentials are not forwarded. Each run freezes task copies and records its configuration before execution. Rules comparisons support the `environment/repo` plus `COPY repo/` Dockerfile layout and the Codex/Claude Code harnesses. Prebuilt `docker_image` tasks are rejected for rules comparisons because they would bypass the modified files. The comparison is **as captured** versus **with rules**: the baseline can already contain rules. The supplied text replaces the root harness rules file in the second copy; it does not remove other instruction files.
-
-## Capture your own failure
+Install the hook and skill once:
 
 ```bash
 grudges install
-# In Claude Code: /grudge what the correct outcome should have been
-# In Codex:       $grudge what the correct outcome should have been
-grudges requests
+```
+
+Then, when your agent gets something wrong:
+
+```text
+Claude Code → /grudge The amount should stay editable until blur.
+Codex       → $grudge The amount should stay editable until blur.
+```
+
+Find the saved ID and build a replayable task:
+
+```bash
 grudges list
 grudges build GRUDGE_ID --shareable
 ```
 
-Installation adds a prompt hook and skill to your local agent configuration. Existing config is backed up; unrelated hooks and edited skills are preserved. Codex may ask you to approve the hook. `grudges install --uninstall` removes managed hooks and unchanged managed skills.
+Building opens an interactive authoring session. **Review the reconstructed task and verifier before using the score.** The `--shareable` option requests fresh code and names; you still review the result before publishing it.
 
-Before each request, capture snapshots tracked and non-ignored untracked files using a temporary Git index. Saving pins the starting and failed states under `refs/grudges/` and copies the session transcript into `~/.grudges`. Your working tree, normal index and branches are preserved. Missing or failed checkpoints are labeled approximate. Avoid concurrent writers while capturing; filesystem snapshots are not atomic across files. Large snapshots are skipped.
+Capture preserves your working tree, normal Git index and branches. Missing checkpoints are labeled approximate. To remove the managed hooks and unchanged managed skills: `grudges install --uninstall`.
 
-Task building fetches a pinned [evals-from-sessions](https://github.com/ibragim-bad/evals-from-sessions) authoring skill and launches your chosen local agent interactively. Review the reconstruction and verifier before accepting the task. `--shareable` requests fresh code and names; it is not an automatic privacy guarantee. `--print` prints the authoring brief without launching the agent, but still prepares files and fetches the skill.
+## Replay the same task. Change one thing.
 
-## Read results
+Set `OPENAI_API_KEY` in your environment for Codex replay. Use model IDs available to your account; live runs incur provider charges.
 
-Each run writes `results.json` and `card.html` under `~/.grudges/runs/`. `grudges card` renders the latest run, or pass a run directory. `--titles titles.json` supplies public task titles.
-
-Cards show solved/scored attempts, errors and missing attempts. A task is majority-fixed only when all planned attempts are scored and strictly more than half solve it. Agent timeouts count as scored failures; provider, infrastructure and grader errors do not. Partial cost totals are labeled. A whole-task reward cannot identify which individual requirement failed. Inspect verifier receipts for that detail. CLI exit 2 signals setup/execution errors; a valid scored task failure returns 0.
-
-## Privacy and limits
-
-Capture is local, but snapshots and transcripts can contain secrets or private code—even when the current files are later deleted. Git ignore rules do not exclude already tracked secrets. Keep `~/.grudges`, Git refs, build workspaces and raw Harbor results private. Building and replaying tasks can send code to the configured provider. Docker tasks execute code; review unfamiliar tasks before running them.
-
-Cards omit raw paths, prompts and run metadata, and use neutral task names when public titles are unavailable. Still review titles, model names and all visible content before sharing. No telemetry or hosted service is included. macOS and Windows have not been validated.
-
-## Development and license
+**Compare models** on the same task, three attempts each:
 
 ```bash
-python3 -m pip install -e . build
-python3 -m unittest discover -s tests -v
-python3 -m build
-python3 scripts/check_dist.py dist
+grudges run path/to/task -a codex \
+  -m MODEL_A -m MODEL_B -k 3
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md) and [RELEASING.md](RELEASING.md). Apache-2.0; adapted portions retain their MIT notice in [NOTICE](NOTICE). Execution uses [Harbor](https://github.com/harbor-framework/harbor).
+**Test your project rules** against the captured setup:
+
+```bash
+grudges run path/to/task -a codex \
+  -m YOUR_MODEL_ID --rules ./AGENTS.md -k 3
+```
+
+The two arms are **as captured** and **with rules**. Existing baseline rules are retained; the second copy replaces the root harness rules file. Inputs are frozen before execution. Native Codex and Claude Code replay use API keys, not subscription logins. See [supported rules layouts and behavior](docs/usage.md#try-a-pack).
+
+## Scores you can inspect
+
+| What you see | What it means |
+| --- | --- |
+| Solved / scored | Successful attempts out of valid scored attempts; timeouts count as failures. |
+| Errors & missing | Provider, grader and infrastructure errors, plus planned attempts with no receipt. |
+| Majority-fixed | Every planned attempt was scored and strictly more than half solved the task. |
+| Cost | Reported usage, with unavailable or partial totals labeled. |
+
+Each run keeps `results.json`, the HTML card and Harbor receipts locally. A whole-task score doesn't tell you which requirement failed; inspect the verifier output. You can [set public titles and regenerate a card](docs/usage.md#read-results) before sharing it.
+
+## Built on tools that already work
+
+Grudges handles capture, replay comparisons and reporting. [evals-from-sessions](https://github.com/ibragim-bad/evals-from-sessions) supplies the task-authoring workflow; [Harbor](https://github.com/harbor-framework/harbor) runs the tasks.
+
+The example packs include [eight explicit tasks](packs/starter/README.md) and [six intent tasks](packs/starter-intent/README.md). Their fairness notes distinguish stated requirements from inferred behavior. [Release checks](RELEASE-CHECKS.md) document what has actually been validated.
+
+## Keep your captures private
+
+Snapshots and transcripts can contain secrets and private code. Capture stays local; authoring and model replay can send code to your provider. Docker tasks execute code. Review tasks, titles and report contents before running or sharing them. [Privacy details](docs/usage.md#privacy-and-limits) · [Report a vulnerability privately](SECURITY.md)
+
+## Contribute a fix—or a good failure
+
+Useful contributions include reproducible bugs, clearer verifiers, and re-authored tasks with explicit contracts. Don't upload raw sessions or private code. Start with [CONTRIBUTING.md](CONTRIBUTING.md); development commands are in the [usage guide](docs/usage.md#development-and-license).
+
+Apache-2.0. Adapted portions retain their MIT notice in [NOTICE](NOTICE).

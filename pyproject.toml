@@ -1,7 +1,7 @@
 [project]
 name = "grudges"
 version = "0.1.0a1"
-description = "Save the tasks your coding agent failed. Re-run them on every new model."
+description = "Turn coding-agent failures into replayable tests. Compare models and project rules."
 readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
@@ -27,4 +27,4 @@ packages = ["src/grudges"]
 "packs" = "grudges/packs"
 
 [tool.hatch.build.targets.sdist]
-include = ["src", "packs", "tests", "scripts", "README.md", "CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md", "RELEASING.md", "RELEASE-CHECKS.md", "LICENSE", "NOTICE", "pyproject.toml"]
+include = ["src", "packs", "tests", "scripts", "docs", "README.md", "CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md", "RELEASING.md", "RELEASE-CHECKS.md", "LICENSE", "NOTICE", "pyproject.toml"]
