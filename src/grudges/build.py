@@ -1,4 +1,4 @@
-"""Turn a saved grudge into a Harbor task with the evals-from-sessions skill.
+"""Turn a saved grudge into a native task with the evals-from-sessions skill.
 
 grudges supplies what that skill otherwise has to reconstruct: the selected
 episode, the exact base tree at the start of the failing request, and the
@@ -63,7 +63,7 @@ def launch(agent, brief, cwd):
     os.execv(binary, [binary, brief])
 
 
-BRIEF = """Turn grudge {id} into a verified Harbor task.
+BRIEF = """Turn grudge {id} into a verified native Grudges task.
 
 Follow the evals-from-sessions skill at {skill} in **{mode}** mode, with these
 differences, because grudges already captured the episode at the moment it failed:
@@ -81,15 +81,19 @@ differences, because grudges already captured the episode at the moment it faile
 - **Reference solution:** if the session later reached an outcome the user accepted, use
   that change. Otherwise, write a reference that satisfies the note and label it
   "authored reference" in provenance.md.
-- **Output:** write the task to {task_dir}. Network: never `no-network` (agents must
-  install themselves). Use an allowlist: `[agent]` only the model endpoint (api.openai.com
-  for Codex); `[environment]` adds install hosts (deb.debian.org, raw.githubusercontent.com,
-  github.com, objects.githubusercontent.com, nodejs.org, registry.npmjs.org). Never inject
-  subscription logins into containers.
+- **Output:** write the task to {task_dir}, with source in environment/repo.
+  Native replay must work without Docker or Harbor. Add a [local] section to task.toml
+  with verify and solve argv arrays. They run in a disposable repository copy.
+  Use {{python}}, {{task}} and {{workspace}} placeholders in argv; subprocesses also
+  receive GRUDGES_WORKSPACE and GRUDGES_TASK. Verification exits 0 for solved,
+  1 for failed, and any other code for verifier errors. The reference solve command
+  must exit 0. Keep tests outside the agent workspace. Do not hardcode /app paths.
+  Document host dependencies; never install them silently. Optional Harbor files
+  may coexist, but must not be required for authoring or native validation.
 - **Difficulty honesty:** never state a must-be-discovered item in the instruction (e.g.
   naming the faulty file or function). If you narrow the repository to a few files,
   that removes the search, so label the task `routine`.
 - Keep both human checkpoints. Stop and ask the user in this chat.
 - When validation passes, tell the user to replay it with:
-  `grudges run {task_dir} -m <model> -m <model>`
+  `grudges run {task_dir}`
 """

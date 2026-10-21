@@ -1,49 +1,57 @@
-# Usage and behavior
+# Usage
 
-## Try a pack
-
-From this checkout, with Python 3.11+ and Git:
+## Run with your subscription
 
 ```bash
-uv tool install .
-grudges --version
-uv tool install 'harbor==0.24.0'
-# Requires a running Docker daemon with Compose and Buildx.
-grudges run --pack starter -a nop -k 1
-grudges run --pack starter -a oracle -k 1
+uvx --from git+https://github.com/alexdevmotion/grudges@v0.3.0a1 grudges run
 ```
 
-These controls make no model API calls: nop checks the starting implementation; oracle runs the reference solution. Docker may download images. The wheel includes eight explicit starter tasks and six intent tasks (`--pack starter-intent`). Read each pack's README and FAIRNESS notes before interpreting results.
-
-For a model run, set `OPENAI_API_KEY` in your environment and choose a model available to your account:
+No arguments runs one starter task once. Codex is selected if installed, otherwise Claude. Sign in beforehand with `codex login` or `claude auth login`. Grudges rejects API logins for native runs and never automatically switches to API billing.
 
 ```bash
-grudges run --pack starter -a codex -m YOUR_MODEL_ID -k 3
-grudges run path/to/task -a codex -m YOUR_MODEL_ID --rules ./AGENTS.md
+grudges run --agent claude
+grudges run path/to/task
+grudges run --pack starter
+grudges run --pack starter-intent
+grudges run path/to/task --rules ./AGENTS.md -k 3
+grudges run path/to/task --agent claude --rules ./CLAUDE.md
 ```
 
-Harbor model runs incur API charges and require provider API keys. Subscription credentials are not forwarded into Harbor. Each run freezes task copies and records its configuration before execution. Rules comparisons support the `environment/repo` plus `COPY repo/` Dockerfile layout and the Codex/Claude Code harnesses. Prebuilt `docker_image` tasks are rejected for rules comparisons because they would bypass the modified files. The comparison is **as captured** versus **with rules**: the baseline can already contain rules. The supplied text replaces the root harness rules file in the second copy; it does not remove other instruction files.
+`-m MODEL` selects a model your subscription supports; omit it for the CLI default. Repeat `-m` to compare models. `--effort` forwards the CLI effort setting. Runs are sequential. `--runner local-codex` and `--runner local-claude` remain compatible aliases; `--trust-local` is no longer required.
 
-## Subscription runners
+Requirements: Linux, Git, and a recent signed-in official CLI. uv provides the Python runtime. Bundled tasks use only Python's standard library and Bash. No Docker daemon or Harbor installation is needed. Custom tasks may have additional documented host dependencies.
 
-Use `--runner local-codex` or `--runner local-claude` with `--trust-local`. They launch the installed official CLI on your host using its existing ChatGPT or Claude subscription login. API login is rejected, provider/key environment overrides are removed, and there is no API fallback. Grudges never reads, copies, or exports login tokens. Allowance limits still apply; cost is labeled unavailable, never $0.
+## How local verification works
 
-```bash
-codex login  # or: claude auth login
-grudges run path/to/task --runner local-codex --trust-local -k 1
-grudges run path/to/task --runner local-claude --trust-local -m sonnet -k 1
-grudges run path/to/task --runner local-claude --trust-local --rules ./CLAUDE.md -k 3
+Grudges freezes task inputs, checks that the baseline fails and the reference fix passes, then launches the agent in a fresh temporary source workspace. After it exits, Grudges grades a disposable candidate copy using the task's local verifier. Neither the original task nor the captured candidate is modified by grading. Rules setups run back to back for each attempt.
+
+Everything runs on your host. Use reviewed tasks: verification commands are executable code, have host access, and are not network-isolated. Codex uses its native workspace sandbox and shell. Claude uses restricted file tools; Grudges includes root `CLAUDE.md` in its prompt because restricted mode does not auto-load it. `@import` directives are not expanded. Tool profiles and host settings differ, so these are not isolated cross-agent benchmarks.
+
+## Write a native task
+
+```text
+my-task/
+  task.toml
+  instruction.md
+  environment/repo/       # starting source, copied for each attempt
+  tests/verify.py          # kept outside the agent workspace
+  solution/solve.sh        # reference fix
 ```
 
-Requirements: Linux, Git, Docker, and a recent CLI. Codex must support `--ephemeral`; Claude must support `--restricted` and `--permission-prompts`. `-m` is optional and otherwise uses the CLI default; choose a model your plan supports. `--effort` forwards the CLI's effort setting. Local runs are sequential; `--agent` is for Harbor only.
+Add explicit local commands to `task.toml`:
 
-Supported tasks have `environment/repo`, an explicit `COPY repo/ /app/`, `WORKDIR /app`, `tests/test.sh`, and `solution/solve.sh`. Prebuilt images, symlinks and nested Git metadata are rejected. Baseline must fail and the reference solution must pass using the same verifier mount arrangement before any model attempt. Tasks requiring hidden build artifacts beneath `/app` may fail this gate. The verifier must work without network access and write a binary reward to `/logs/verifier/reward.txt`.
+```toml
+[task]
+name = "my-task"
 
-Every attempt gets a fresh temporary source workspace. Candidates are preserved locally; verification runs in Docker with no network and a disposable writable copy. Task text referring to `/app` is mapped to the temporary working directory for the agent. Restricted Claude does not auto-load project instructions, so Grudges explicitly includes the root `CLAUDE.md` in its prompt for both baseline and rules setups; `@import` directives are not expanded and nested instruction discovery is not guaranteed. CLI versions, requested models, tool profiles and rules hashes are recorded. Claude's reported model usage is retained; Codex's requested model is not independently verified.
+[local]
+verify = ["{python}", "{task}/tests/verify.py"]
+solve = ["bash", "{task}/solution/solve.sh"]
+```
 
-Local mode is for **trusted tasks only**. Codex uses its workspace sandbox and shell; Claude uses restricted Read/Edit/Write/Glob/Grep tools and cannot run tests itself. Host tools, global instructions and CLI configuration may affect results. An agent can potentially discover verifier inputs elsewhere on the host. Do not treat these results as isolated benchmarks, compare the two tool profiles as equivalent, or use this mode for hostile tasks. Credentials remain in their normal location and are not mounted into Docker.
+Commands are argument arrays, not shell strings. They run with the disposable repository as their working directory. `{python}` is Grudges' Python interpreter; `{task}` and `{workspace}` resolve to absolute paths. `GRUDGES_TASK` and `GRUDGES_WORKSPACE` also expose those paths to subprocesses. Never hardcode `/app` in native scripts. Dockerfiles are optional and ignored by native replay.
 
-Authentication, quota and incomplete-output errors stop the queue, preserve receipts, and leave remaining attempts missing. Local timeouts are unscored infrastructure errors because a timeout alone cannot distinguish model work from provider retries. No automatic retry spends additional allowance.
+The verifier exits **0 for solved**, **1 for failed**, and **any other code for a verifier error**. The reference command must exit 0. Use exit 2 for missing dependencies or broken test infrastructure. Dependencies must already be installed; Grudges does not install arbitrary task dependencies. Symlinks and nested Git metadata are rejected. Container-only tasks need an explicit local verifier or the alternative Harbor route below.
 
 ## Capture your own failure
 
@@ -64,17 +72,28 @@ Task building fetches a pinned [evals-from-sessions](https://github.com/ibragim-
 
 ## Read results
 
-Each run writes `results.json` and `card.html` under `~/.grudges/runs/`. `grudges card` renders the latest run, or pass a run directory. `--titles titles.json` supplies public task titles.
+Each run writes `results.json`, `card.html`, candidates and verifier logs under `~/.grudges/runs/`. `grudges card` regenerates the latest card. `--titles titles.json` supplies public task titles.
 
-Cards show solved/scored attempts, errors and missing attempts. A task is majority-fixed only when all planned attempts are scored and strictly more than half solve it. Harbor agent timeouts count as scored failures; local timeouts remain unscored; provider, infrastructure and grader errors do not. Partial cost totals are labeled. A whole-task reward cannot identify which individual requirement failed. Inspect verifier receipts for that detail. CLI exit 2 signals setup/execution errors; a valid scored task failure returns 0.
+Cards show solved/scored attempts, errors and missing attempts. Majority-fixed requires all planned attempts scored and a strict majority solved. Native timeouts remain unscored because provider retries cannot be distinguished from model work. Authentication and infrastructure errors stop the queue; remaining attempts stay missing. CLI exit 2 signals execution errors or interruption; valid task failures return 0. Subscription costs are unavailable, never inferred from API prices.
 
 ## Privacy and limits
 
-Capture is local, but snapshots and transcripts can contain secrets or private code—even when the current files are later deleted. Git ignore rules do not exclude already tracked secrets. Keep `~/.grudges`, Git refs, build workspaces and raw Harbor results private. Building and replaying tasks can send code to the configured provider. Docker tasks execute code; review unfamiliar tasks before running them.
+Snapshots and transcripts can contain secrets, including files later deleted. Keep `~/.grudges`, Git refs and raw receipts private. Authoring and replay send code to the chosen provider. Cards omit raw paths and prompts, but review their visible labels before sharing. No telemetry or hosted service is included. macOS and Windows are not validated.
 
-Cards omit raw paths, prompts and run metadata, and use neutral task names when public titles are unavailable. Still review titles, model names and all visible content before sharing. No telemetry or hosted service is included. macOS and Windows have not been validated.
+## Alternative: API and container replay
 
-## Development and license
+Install Harbor 0.24.0 and run Docker with Compose and Buildx. Set the provider API key in the environment, then explicitly select Harbor:
+
+```bash
+grudges run path/to/task --runner harbor -a codex -m MODEL_ID -k 3
+grudges run path/to/task --runner harbor -a claude-code -m MODEL_ID
+grudges run --pack starter --runner harbor -a nop
+grudges run --pack starter --runner harbor -a oracle
+```
+
+API runs incur provider charges. Native subscription credentials are not forwarded. Harbor requires its task layout, Dockerfile and `tests/test.sh`; it ignores the native `[local]` commands. Rules comparisons require source-built `COPY repo/` tasks and reject prebuilt `docker_image` tasks. Harbor agent timeouts count as scored failures. For compatibility, `-a nop` and `-a oracle` select Harbor automatically.
+
+## Development
 
 ```bash
 python3 -m pip install -e . build
@@ -83,4 +102,4 @@ python3 -m build
 python3 scripts/check_dist.py dist
 ```
 
-See [CONTRIBUTING.md](../CONTRIBUTING.md), [SECURITY.md](../SECURITY.md) and [RELEASING.md](../RELEASING.md). Apache-2.0; adapted portions retain their MIT notice in [NOTICE](../NOTICE). Execution uses [Harbor](https://github.com/harbor-framework/harbor).
+See [CONTRIBUTING.md](../CONTRIBUTING.md) and [RELEASING.md](../RELEASING.md).

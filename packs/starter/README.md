@@ -2,15 +2,15 @@
 
 Eight small, re-authored, headless Python 3.13 tasks. Each is a fresh behavioral analogue of an authorized private session; no original repository code, transcript, customer data or provenance is included. All tasks are labelled **routine**: requirements are explicit; the work is finding and repairing the relevant implementation across a few modules. Human completion times and current-model difficulty are unmeasured. Some seeds are historical bug repairs or user-requested improvements rather than a proven correction of the source agent's own work.
 
-From the repository root, with Docker, Harbor and your own supported API credentials configured:
+With Codex or Claude signed in, run the pack locally (no Docker or API key):
 
 ```sh
-grudges run packs/starter -m A -m B -k 3
+grudges run --pack starter
 ```
 
-Replace A/B with supported model ids. The run writes a results card with these public titles. The pack is a functional example, not a model ranking benchmark; do not promise a particular time to complete it.
+Optionally add `--agent claude`, `-m MODEL`, or `-k 3`. The run writes a results card with these public titles. The pack is a functional example, not a model ranking benchmark; do not promise a particular time to complete it.
 
-Each task uses a digest-pinned Python slim image and the standard library. Verifiers use only local files and subprocesses and download nothing. The setup allowlist permits agent installation; the agent-phase allowlist is limited to `api.openai.com`. Source repositories, accounts, browsers and live services are unnecessary. Tests and reference solutions are outside the image build context's copied repository and are supplied only in their Harbor phases.
+Native replay uses host Python and Bash with standard-library tests. Optional Harbor replay uses a digest-pinned Python slim image. Verifiers use only local files and subprocesses and download nothing. The setup allowlist permits agent installation; the agent-phase allowlist is limited to `api.openai.com`. Source repositories, accounts, browsers and live services are unnecessary. Tests and reference solutions are outside the image build context's copied repository and are supplied only in their Harbor phases.
 
 | Directory | Your grudge | Language | Mistake captured |
 |---|---|---|---|
@@ -23,7 +23,7 @@ Each task uses a digest-pinned Python slim image and the standard library. Verif
 | `blur-formatting` | Format amounts on blur without submitting the separators | Python | Formatting canonical state or focused input instead of the blurred display. |
 | `native-language-menu` | Let visitors recognize their language in both menus | Python | Translating option names into the current UI locale, or fixing visible text without pronunciation/accessibility. |
 
-## Validation receipts
+## Historical validation receipts
 
 Initial mechanical validation completed with **113 final-version trials and zero infrastructure exceptions**. Those checks used nop and oracle agents. A separately written alternative passes for every task; no independent reviewer/model authored those alternatives.
 
@@ -77,3 +77,7 @@ SOFTWARE.
 ## Release fixture correction
 
 `refund-visibility` 1.0.2 aligns the ordinary customer template catalog with the identifier already required by the instruction and emitted by mail. The table and task-tree hash above describe the historical 1.0.1 inputs; they do not attest to this revised tree. The exact public output contract and verifier are unchanged.
+
+## Native replay update (0.3.0a1)
+
+Task patch versions were incremented for portable workspace paths and explicit `[local]` commands. All eight current baselines fail and reference solutions pass through native verification. Earlier Harbor receipt tables and hashes describe their original task versions, not this revised tree. Requirements and expected outputs are unchanged.

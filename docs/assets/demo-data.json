@@ -1,15 +1,10 @@
 {
   "capture": "saved grudge DEMO_ID \u00b7 exact starting state \u00b7 demo-repo\nepisode starts at: 'Format the amount on blur.'",
-  "controls": [
-    {
-      "agent": "oracle",
-      "solved": 8,
-      "scored": 8
-    },
-    {
-      "agent": "nop",
-      "solved": 0,
-      "scored": 8
-    }
-  ]
+  "replay": {
+    "agent": "local-codex",
+    "model": "gpt-6.1-sol",
+    "solved": 1,
+    "scored": 1,
+    "task": "starter/blur-formatting"
+  }
 }

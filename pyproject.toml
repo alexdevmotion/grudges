@@ -1,7 +1,7 @@
 [project]
 name = "grudges"
-version = "0.2.0a1"
-description = "Turn coding-agent failures into replayable tests. Compare models and project rules."
+version = "0.3.0a1"
+description = "Turn agent mistakes into regression tests. Replay with your Codex or Claude subscription."
 readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]

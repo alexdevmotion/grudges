@@ -1,3 +1,13 @@
+# Local release validation — 0.3.0a1
+
+21 October 2026. Python 3.11 and 3.13: 81 tests passed, one optional test skipped. The suite includes 28 real native baseline/reference controls across all 14 bundled tasks, without Docker. Fresh-wheel checks also passed outside the checkout.
+
+Live `grudges run -m gpt-6.1-sol --effort low` and `grudges run --agent claude -m sonnet --effort low` each completed the starter example and its local controls. Neither path invoked Docker or Harbor. Final two-setup comparisons also passed through both CLIs: the rules marker was absent in each baseline and present only in the rules candidate. All four model attempts solved. The authoring brief and task manifests now specify native verification commands; Harbor remains an explicit alternative. The animated walkthrough reflects the native run.
+
+These checks establish workflow mechanics, not model quality. See the GitHub release for publication status. Native verifier commands run on the host without network isolation.
+
+---
+
 # Local release validation — 0.2.0a1
 
 21 October 2026. Linux; GitHub prerelease preparation.

@@ -1,4 +1,4 @@
-"""Render the README walkthrough from a sanitized capture and verified controls.
+"""Render the README walkthrough from a sanitized capture and verified native replay.
 
 Run: python scripts/render_demo.py (Pillow and DejaVu Sans fonts required).
 This renders an edited walkthrough, not a real-time screen recording.
@@ -15,25 +15,21 @@ def font(size, mono=False, bold=False):
     name = 'DejaVuSansMono' if mono else 'DejaVuSans'
     return ImageFont.truetype(str(FONT / (name + ('-Bold' if bold else '') + '.ttf')), size)
 
-controls = {r['agent']: r for r in DATA['controls']}
-def control(agent):
-    r = controls[agent]
-    return f"{agent}: fixed {r['solved']}/{r['scored']} · attempts {r['solved']}/{r['scored']} · no errors"
-
 scenes = [
  ('01 / CAPTURE', 'Don’t lose the failure.', 'A tiny local fixture. A mistake worth keeping.',
   ['$ grudges save --session demo '+chr(92), '  --note "Keep the amount editable until blur."', '', *DATA['capture'].splitlines()],
   'Starting code + failed attempt, pinned locally.'),
- ('02 / REPLAY', 'Make failure repeatable.', 'Try the bundled starter pack. No API key needed.',
-  ['$ grudges run --pack starter -a nop -k 1', '',
-   control('nop'), '',
-   '$ grudges run --pack starter -a oracle -k 1', '',
-   control('oracle')],
-  'Broken starting code fails. Reference fixes pass.'),
- ('03 / COMPARE', 'New model? Same receipts.', 'Your next step: replay a reviewed task across models.',
-  ['$ grudges run path/to/task -a codex '+chr(92), '  -m MODEL_A -m MODEL_B -k 3', '',
-   '# Or test your project rules', '$ grudges run path/to/task -a codex '+chr(92),
-   '  -m YOUR_MODEL_ID --rules ./AGENTS.md -k 3'],
+ ('02 / REPLAY', 'Use the plan you already have.', 'One starter task. One attempt. No Docker.',
+  ['$ grudges run -m gpt-6.1-sol --effort low', '',
+   'Using codex subscription · local verification',
+   'Checking starter/blur-formatting (as captured)…', '',
+   'trial-0001: starter/blur-formatting · solved',
+   '1/1 solved · no errors'],
+  'Fresh workspace. Local checks. A result you can inspect.'),
+ ('03 / COMPARE', 'Do your rules actually help?', 'Replay the same task with and without your rules.',
+  ['$ grudges run path/to/task --rules ./AGENTS.md', '',
+   '# Prefer Claude?', '$ grudges run --agent claude', '',
+   '# Repeat for more evidence', '$ grudges run path/to/task --rules ./AGENTS.md -k 3'],
   'As captured → with rules. Every attempt accounted for.'),
 ]
 
@@ -57,7 +53,7 @@ def render(index, progress):
         color=amber if line.startswith('$') else green if ('exact starting' in line or 'no errors' in line) else light
         d.text((58,275+j*28),line,font=font(16,mono=True),fill=color)
     d.text((38,523),note,font=font(19,bold=True),fill=light)
-    d.text((38,562),'Edited walkthrough · local fixture + verified controls · no model calls',font=font(13),fill=muted)
+    d.text((38,562),'Edited walkthrough · local capture + subscription replay · timing condensed',font=font(13),fill=muted)
     for j in range(3):
         x=830+j*44
         d.rounded_rectangle((x,565,x+32,571),radius=3,fill=amber if j==index else '#3b4c5b')

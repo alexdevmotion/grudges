@@ -46,3 +46,29 @@ class CliTest(unittest.TestCase):
                  patch.object(cli.card, 'write', return_value=Path('/tmp/card.html')), \
                  contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(cli.main(['run','--pack','starter','--runner','local-claude','--trust-local']), 2)
+
+    def test_bare_run_uses_native_subscription_and_one_demo_attempt(self):
+        result = {'records':[{'status':'solved'}], 'summary':{}, 'complete':True}
+        with patch.object(cli.shutil, 'which', return_value='/bin/codex'), \
+             patch.object(cli.local, 'replay', return_value=(Path('/tmp/receipt'), result)) as native, \
+             patch.object(cli.run, 'replay') as harbor, \
+             patch.object(cli.card, 'write'), contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(cli.main(['run']), 0)
+            self.assertEqual(native.call_args.args[1], 'local-codex')
+            self.assertEqual(native.call_args.args[0][0].name, 'blur-formatting')
+            self.assertEqual(native.call_args.kwargs['attempts'], 1)
+            harbor.assert_not_called()
+
+    def test_claude_agent_selects_native_claude(self):
+        result = {'records':[{'status':'solved'}], 'summary':{}, 'complete':True}
+        with patch.object(cli.local, 'replay', return_value=(Path('/tmp/receipt'), result)) as native, \
+             patch.object(cli.card, 'write'), contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(cli.main(['run','--agent','claude']), 0)
+            self.assertEqual(native.call_args.args[1], 'local-claude')
+
+    def test_build_defaults_to_installed_codex(self):
+        with patch.object(cli.shutil, 'which', return_value='/bin/codex'), \
+             patch.object(cli.build, 'prepare', return_value=(Path('/tmp/build'), 'brief')), \
+             patch.object(cli.build, 'launch') as launch, contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(cli.main(['build','example']), 0)
+            launch.assert_called_once_with('codex', 'brief', Path('/tmp/build'))
